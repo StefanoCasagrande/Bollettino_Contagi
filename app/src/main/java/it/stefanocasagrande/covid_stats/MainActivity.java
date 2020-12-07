@@ -3,11 +3,13 @@ package it.stefanocasagrande.covid_stats;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,6 +17,17 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.jetbrains.annotations.NotNull;
+
+import it.stefanocasagrande.covid_stats.Network.API;
+import it.stefanocasagrande.covid_stats.Network.NetworkClient;
+import it.stefanocasagrande.covid_stats.json_classes.Total_Response;
+import it.stefanocasagrande.covid_stats.ui.MainFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.bringToFront();
+
+        //getTotalReport();
+        getTotalByDay("2020-06-01");
     }
 
     @Override
@@ -60,5 +76,65 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    //region Chiamate API
+
+    public void getTotalByDay(String data_da_considerare) {
+
+        //Obtain an instance of Retrofit by calling the static method.
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API covidAPIs = retrofit.create(API.class);
+
+        Call call = covidAPIs.getTotalbyDate(data_da_considerare, getString(R.string.chiave));
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    Total_Response wResponse = (Total_Response) response.body();
+                    Toast.makeText(getApplicationContext(),String.format("Morti totali - %s", wResponse.getData().getdeaths()), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public void getTotalReport() {
+
+        //Obtain an instance of Retrofit by calling the static method.
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API covidAPIs = retrofit.create(API.class);
+
+        Call call = covidAPIs.getActualTotal(getString(R.string.chiave));
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    Total_Response wResponse = (Total_Response) response.body();
+                    Toast.makeText(getApplicationContext(),String.format("Morti totali - %s", wResponse.getData().getdeaths()), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
