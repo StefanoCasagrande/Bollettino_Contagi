@@ -3,6 +3,7 @@ package it.stefanocasagrande.covid_stats.json_classes;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,14 @@ public class Data {
     @SerializedName("date")
     @Expose
     private String date;
+
+    public String getdate_dd_MM_yyyy() {
+
+        Date date = getdate();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
+
+    }
 
     public Date getdate() {
 

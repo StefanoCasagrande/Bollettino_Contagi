@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.bringToFront();
 
-        //getTotalReport();
-        getTotalByDay("2020-06-01");
     }
 
     @Override
@@ -80,14 +78,19 @@ public class MainActivity extends AppCompatActivity {
 
     //region Chiamate API
 
-    public void getTotalByDay(String data_da_considerare) {
+    public void getTotalReport(MainFragment var, String data_da_considerare) {
 
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
         API covidAPIs = retrofit.create(API.class);
 
-        Call call = covidAPIs.getTotalbyDate(data_da_considerare, getString(R.string.chiave));
+        Call call;
+
+        if (data_da_considerare==null)
+            call = covidAPIs.getActualTotal(getString(R.string.chiave));
+        else
+            call = covidAPIs.getTotalbyDate(data_da_considerare, getString(R.string.chiave));
 
         call.enqueue(new Callback() {
             @Override
@@ -97,36 +100,9 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     Total_Response wResponse = (Total_Response) response.body();
-                    Toast.makeText(getApplicationContext(),String.format("Morti totali - %s", wResponse.getData().getdeaths()), Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    public void getTotalReport() {
-
-        //Obtain an instance of Retrofit by calling the static method.
-        Retrofit retrofit= NetworkClient.getRetrofitClient();
-
-        API covidAPIs = retrofit.create(API.class);
-
-        Call call = covidAPIs.getActualTotal(getString(R.string.chiave));
-
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) {
-              /*This is the success callback. Though the response type is JSON, with Retrofit we get
-              the response in the form of WResponse POJO class
-              */
-                if (response.body()!=null) {
-                    Total_Response wResponse = (Total_Response) response.body();
-                    Toast.makeText(getApplicationContext(),String.format("Morti totali - %s", wResponse.getData().getdeaths()), Toast.LENGTH_LONG).show();
+                    if (var.isVisible())
+                        var.newReportAvailable(wResponse);
                 }
             }
 
