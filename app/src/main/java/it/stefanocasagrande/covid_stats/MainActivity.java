@@ -1,8 +1,12 @@
 package it.stefanocasagrande.covid_stats;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +24,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import it.stefanocasagrande.covid_stats.Network.API;
 import it.stefanocasagrande.covid_stats.Network.NetworkClient;
 import it.stefanocasagrande.covid_stats.json_classes.Total_Response;
@@ -28,6 +39,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static it.stefanocasagrande.covid_stats.Common.Date_To_String_yyyy_MM_DD;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     //region Chiamate API
 
-    public void getTotalReport(MainFragment var, String data_da_considerare) {
+    public void getTotalReport(MainFragment var, Date data_da_considerare) {
 
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit= NetworkClient.getRetrofitClient();
@@ -90,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         if (data_da_considerare==null)
             call = covidAPIs.getActualTotal(getString(R.string.chiave));
         else
-            call = covidAPIs.getTotalbyDate(data_da_considerare, getString(R.string.chiave));
+            call = covidAPIs.getTotalbyDate(Date_To_String_yyyy_MM_DD(data_da_considerare), getString(R.string.chiave));
 
         call.enqueue(new Callback() {
             @Override
@@ -113,4 +126,78 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    //endregion
+
+    public void Aggiorna_Report_Totali(MainFragment var)
+    {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Data situazione")
+                .setMessage("Vuoi visualizzare ultimo report disponibile o selezionare data?")
+                .setPositiveButton("Ultimo disponibile", (dialog2, which) ->
+                        getTotalReport(var, null)
+                )
+                .setNegativeButton("Selezionare data", (dialog2, which) ->
+                        Setta_Data(var)
+                )
+                .show();
+    }
+
+    //region Dialog Scelta Data
+
+    public void Setta_Data(MainFragment var)
+    {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Inserisci data");
+        alert.setView(R.layout.edit_date_style);
+        alert.setPositiveButton("Conferma", (dialog, whichButton) -> {
+
+            if (et_data_consegna.getText().toString().equals(""))
+            {
+                Toast.makeText(this, "Nessuna data indicata", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            try {
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                Date date = format.parse(et_data_consegna.getText().toString());
+
+                getTotalReport(var, date);
+            }
+            catch (ParseException ex)
+            {
+                Toast.makeText(this, "Data non valida", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alert.setNegativeButton("Annulla", null);
+        AlertDialog dd = alert.show();
+
+        et_data_consegna = dd.findViewById(R.id.et_data_consegna);
+
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        };
+
+        et_data_consegna.setOnClickListener((View v)->
+                new DatePickerDialog(this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        );
+    }
+
+    Calendar myCalendar = Calendar.getInstance();
+    TextView et_data_consegna;
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
+        et_data_consegna.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    //endregion
 }

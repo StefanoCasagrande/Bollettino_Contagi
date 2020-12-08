@@ -1,5 +1,6 @@
 package it.stefanocasagrande.covid_stats.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Date;
 
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
@@ -19,7 +23,7 @@ import it.stefanocasagrande.covid_stats.json_classes.Total_Response;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment implements Covid_Interface {
+public class MainFragment extends Fragment implements Covid_Interface, View.OnClickListener {
 
     TextView tv_giorno;
     TextView tv_casi_confermati;
@@ -59,6 +63,9 @@ public class MainFragment extends Fragment implements Covid_Interface {
         tv_ricoverati = v.findViewById(R.id.tv_ricoverati);
         tv_ricoverati_aumento = v.findViewById(R.id.tv_ricoverati_aumento);
 
+        Button btn_aggiorna = v.findViewById(R.id.btn_aggiorna);
+        btn_aggiorna.setOnClickListener(this);
+
         ((MainActivity) getActivity()).getTotalReport(this, null);
 
         return v;
@@ -77,5 +84,10 @@ public class MainFragment extends Fragment implements Covid_Interface {
 
         tv_ricoverati.setText(String.valueOf(wResponse.getData().getrecovered()));
         tv_ricoverati_aumento.setText(String.valueOf(wResponse.getData().getrecovered_diff()));
+    }
+
+    @Override
+    public void onClick(View view) {
+        ((MainActivity) getActivity()).Aggiorna_Report_Totali(this);
     }
 }
