@@ -27,8 +27,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import it.stefanocasagrande.covid_stats.Common.Common;
+import it.stefanocasagrande.covid_stats.Common.DB;
 import it.stefanocasagrande.covid_stats.Network.API;
 import it.stefanocasagrande.covid_stats.Network.NetworkClient;
+import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 import it.stefanocasagrande.covid_stats.ui.CercaFragment;
@@ -71,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.bringToFront();
 
+        Common.Database = new DB(this);
+        getNations();
+
     }
 
     @Override
@@ -89,7 +95,34 @@ public class MainActivity extends AppCompatActivity {
 
     //region Chiamate API
 
-    public void getNations(CercaFragment var)
+    public void getProvinces(String iso)
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API covidAPIs = retrofit.create(API.class);
+
+        Call call = covidAPIs.getProvinces(iso, getString(R.string.chiave));
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    Provinces wResponse = (Provinces) response.body();
+                    Common.Database.Insert_Provinces(wResponse.getData());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getNations()
     {
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
@@ -105,9 +138,7 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     Regions wResponse = (Regions) response.body();
-
-                    if (var.isVisible())
-                        var.newNationsAvailable(wResponse);
+                    Common.Database.Insert_Nations(wResponse.getData());
                 }
             }
 
@@ -227,4 +258,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //endregion
+
 }

@@ -6,9 +6,9 @@ public class Total_Response {
 
     @SerializedName("data")
     @Expose
-    private Data data;
+    private Data_Reports data;
 
-    public Data getData() {
+    public Data_Reports getData() {
         return data;
     }
 

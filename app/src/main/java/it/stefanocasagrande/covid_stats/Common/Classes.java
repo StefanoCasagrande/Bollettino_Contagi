@@ -9,4 +9,11 @@ public class Classes {
         public String iso;
         public String name;
     }
+
+    public static class Province_Detail implements Serializable
+    {
+        public String iso;
+        public String name;
+        public String province;
+    }
 }
