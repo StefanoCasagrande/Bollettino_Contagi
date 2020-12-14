@@ -3,17 +3,13 @@ package it.stefanocasagrande.covid_stats;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,14 +29,16 @@ import java.util.Locale;
 
 import it.stefanocasagrande.covid_stats.Network.API;
 import it.stefanocasagrande.covid_stats.Network.NetworkClient;
-import it.stefanocasagrande.covid_stats.json_classes.Total_Response;
+import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
+import it.stefanocasagrande.covid_stats.ui.CercaFragment;
 import it.stefanocasagrande.covid_stats.ui.MainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static it.stefanocasagrande.covid_stats.Common.Date_To_String_yyyy_MM_DD;
+import static it.stefanocasagrande.covid_stats.Common.Metodi.Date_To_String_yyyy_MM_DD;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,6 +89,35 @@ public class MainActivity extends AppCompatActivity {
 
     //region Chiamate API
 
+    public void getNations(CercaFragment var)
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API covidAPIs = retrofit.create(API.class);
+
+        Call call = covidAPIs.getregions(getString(R.string.chiave));
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    Regions wResponse = (Regions) response.body();
+
+                    if (var.isVisible())
+                        var.newNationsAvailable(wResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void getTotalReport(MainFragment var, Date data_da_considerare) {
 
         //Obtain an instance of Retrofit by calling the static method.
@@ -131,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Aggiorna_Report_Totali(MainFragment var)
     {
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this)
                 .setTitle("Data situazione")
                 .setMessage("Vuoi visualizzare ultimo report disponibile o selezionare data?")
                 .setPositiveButton("Ultimo disponibile", (dialog2, which) ->

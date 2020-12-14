@@ -1,6 +1,5 @@
 package it.stefanocasagrande.covid_stats.ui;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Date;
-
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
-import it.stefanocasagrande.covid_stats.json_classes.Total_Response;
+import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,6 +82,11 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
 
         tv_ricoverati.setText(String.valueOf(wResponse.getData().getrecovered()));
         tv_ricoverati_aumento.setText(String.valueOf(wResponse.getData().getrecovered_diff()));
+    }
+
+    @Override
+    public void newNationsAvailable(Regions wResponse) {
+
     }
 
     @Override
