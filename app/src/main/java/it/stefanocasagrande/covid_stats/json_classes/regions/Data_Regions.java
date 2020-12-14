@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Data implements Serializable {
+public class Data_Regions implements Serializable {
 
     @SerializedName("iso")
     @Expose
-    private String iso;
+    public String iso;
 
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
 
 }
