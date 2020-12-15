@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Metodi {
+public class Methods {
 
     public static String Date_To_String_yyyy_MM_DD(Date date)
     {

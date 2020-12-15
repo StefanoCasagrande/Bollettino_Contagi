@@ -34,14 +34,13 @@ import it.stefanocasagrande.covid_stats.Network.NetworkClient;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
-import it.stefanocasagrande.covid_stats.ui.CercaFragment;
 import it.stefanocasagrande.covid_stats.ui.MainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static it.stefanocasagrande.covid_stats.Common.Metodi.Date_To_String_yyyy_MM_DD;
+import static it.stefanocasagrande.covid_stats.Common.Methods.Date_To_String_yyyy_MM_DD;
 
 public class MainActivity extends AppCompatActivity {
 

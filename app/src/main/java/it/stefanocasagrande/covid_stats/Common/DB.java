@@ -100,10 +100,10 @@ public class DB extends SQLiteOpenHelper {
 
     //region Nations
 
-    public List<Classes.Nation_Detail> get_Nations(String filter)
+    public List<Data_Regions> get_Nations(String filter)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Classes.Nation_Detail> lista = new ArrayList<>();
+        List<Data_Regions> lista = new ArrayList<>();
 
         String sql_query="SELECT ISO, NAME from NATIONS ";
 
@@ -112,7 +112,7 @@ public class DB extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
             do {
-                Classes.Nation_Detail var = new Classes.Nation_Detail();
+                Data_Regions var = new Data_Regions();
 
                 var.iso = c.getString(0);
                 var.name = c.getString(1);
@@ -152,10 +152,10 @@ public class DB extends SQLiteOpenHelper {
 
     //region Provinces
 
-    public List<Classes.Province_Detail> get_Provinces(String filter)
+    public List<Data_Provinces> get_Provinces(String filter)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Classes.Province_Detail> lista = new ArrayList<>();
+        List<Data_Provinces> lista = new ArrayList<>();
 
         String sql_query="SELECT ISO, NAME from NATIONS ";
 
@@ -164,7 +164,7 @@ public class DB extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
             do {
-                Classes.Province_Detail var = new Classes.Province_Detail();
+                Data_Provinces var = new Data_Provinces();
 
                 var.iso = c.getString(0);
                 var.name = c.getString(1);

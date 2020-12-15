@@ -5,22 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import it.stefanocasagrande.covid_stats.Common.Classes;
 import it.stefanocasagrande.covid_stats.R;
+import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
 
-public class Nation_Adapter extends ArrayAdapter<Classes.Nation_Detail> {
+public class Regions_Adapter extends ArrayAdapter<Data_Regions> {
 
-    private List<Classes.Nation_Detail> Lista;
+    private List<Data_Regions> Lista;
     private Context context;
 
-    public Nation_Adapter(Context v_context, int resource, List<Classes.Nation_Detail> objects) {
+    public Regions_Adapter(Context v_context, int resource, List<Data_Regions> objects) {
         super(v_context, resource, objects);
 
         context = v_context;
@@ -33,7 +32,7 @@ public class Nation_Adapter extends ArrayAdapter<Classes.Nation_Detail> {
         TextView secondText;
     }
 
-    public Classes.Nation_Detail getItemList(int position) {
+    public Data_Regions getItemList(int position) {
         return Lista.get(position);
     }
 
