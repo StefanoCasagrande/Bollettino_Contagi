@@ -80,10 +80,11 @@ public class DB extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean Delete(String tableName)
+    public boolean Delete(String tableName, String filter)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + tableName);
+
+        db.execSQL(String.format("DELETE FROM %s %s", tableName, filter));
 
         return true;
     }
@@ -100,7 +101,7 @@ public class DB extends SQLiteOpenHelper {
 
     //region Nations
 
-    public List<Data_Regions> get_Nations(String filter)
+    public List<Data_Regions> get_Nations()
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Regions> lista = new ArrayList<>();
@@ -117,13 +118,7 @@ public class DB extends SQLiteOpenHelper {
                 var.iso = c.getString(0);
                 var.name = c.getString(1);
 
-                if (filter!=null && !filter.equals(""))
-                {
-                    if (var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
-                        lista.add(var);
-                }
-                else
-                    lista.add(var);
+                lista.add(var);
 
             } while(c.moveToNext());
         }
@@ -137,7 +132,7 @@ public class DB extends SQLiteOpenHelper {
         if (lista.size() == 0)
             return;
 
-        if (Delete("NATIONS")) {
+        if (Delete("NATIONS", "")) {
 
             List<String> sql_insert_values = new ArrayList<>();
 
@@ -152,14 +147,14 @@ public class DB extends SQLiteOpenHelper {
 
     //region Provinces
 
-    public List<Data_Provinces> get_Provinces(String filter)
+    public List<Data_Provinces> get_Provinces(String iso)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Provinces> lista = new ArrayList<>();
 
-        String sql_query="SELECT ISO, NAME from NATIONS ";
-
-        sql_query += " order by NAME";
+        String sql_query="SELECT ISO, PROVINCE from PROVINCES ";
+        sql_query+= " WHERE ISO= " + Validate_String(iso);
+        sql_query += " order by PROVINCE";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
@@ -167,15 +162,8 @@ public class DB extends SQLiteOpenHelper {
                 Data_Provinces var = new Data_Provinces();
 
                 var.iso = c.getString(0);
-                var.name = c.getString(1);
-
-                if (filter!=null && !filter.equals(""))
-                {
-                    if (var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
-                        lista.add(var);
-                }
-                else
-                    lista.add(var);
+                var.province = c.getString(1);
+                lista.add(var);
 
             } while(c.moveToNext());
         }
@@ -185,11 +173,11 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
-    public void Insert_Provinces(List<Data_Provinces> lista) {
+    public boolean Insert_Provinces(List<Data_Provinces> lista) {
         if (lista.size() == 0)
-            return;
+            return false;
 
-        if (Delete("PROVINCES")) {
+        if (Delete("PROVINCES", " WHERE ISO= " + Validate_String(lista.get(0).iso))) {
 
             List<String> sql_insert_values = new ArrayList<>();
 
@@ -201,8 +189,10 @@ public class DB extends SQLiteOpenHelper {
                 sql_insert_values.add(String.format("(%s, %s)", Validate_String(var.iso), Validate_String(var.province)));
             }
 
-            Insert_Multi("INSERT INTO PROVINCES ( ISO, PROVINCE ) VALUES ", sql_insert_values);
+            return Insert_Multi("INSERT INTO PROVINCES ( ISO, PROVINCE ) VALUES ", sql_insert_values);
         }
+        else
+            return false;
     }
 
     //endregion

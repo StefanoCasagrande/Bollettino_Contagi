@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.stefanocasagrande.covid_stats.Adapters.Regions_Adapter;
@@ -28,6 +29,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
     ListView ls_stati;
     EditText textFilter;
     private Regions_Adapter adapter;
+    private List<Data_Regions> full_list;
 
     public ListRegionsFragment() {
         // Required empty public constructor
@@ -73,6 +75,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
             }
         });
 
+        full_list = Common.Database.get_Nations();
         Carica_Dati("");
 
         return v;
@@ -80,13 +83,29 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
     public void Carica_Dati(String filter)
     {
-        List<Data_Regions> lista = Common.Database.get_Nations(filter);
+        List<Data_Regions> lista = new ArrayList<>();
+
+        if (filter==null || filter.equals(""))
+            lista = full_list;
+        else
+        {
+            for(Data_Regions var : full_list)
+            {
+                if (filter!=null && !filter.equals(""))
+                {
+                    if (var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
+                        lista.add(var);
+                }
+            }
+        }
+
         adapter = new Regions_Adapter(getActivity(), R.layout.single_item,lista);
         ls_stati.setAdapter(adapter);
         ls_stati.setOnItemClickListener((parent, view, position, id)-> {
 
-            Data_Regions nazione_selezionata = adapter.getItemList(position);
-            ((MainActivity) getActivity()).getProvinces(nazione_selezionata.iso);
+            Data_Regions nation_selected = adapter.getItemList(position);
+
+            ((MainActivity) getActivity()).List_Provinces(nation_selected.iso);
 
         });
     }

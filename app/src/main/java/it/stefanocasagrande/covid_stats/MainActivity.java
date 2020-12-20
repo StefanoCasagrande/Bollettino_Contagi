@@ -74,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView.bringToFront();
 
         Common.Database = new DB(this);
-        getNations();
 
+        if (Common.Database.get_Nations().size()==0)
+            getNations();
     }
 
     @Override
@@ -90,6 +91,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void List_Provinces(String iso)
+    {
+        if (Common.Database.get_Provinces(iso).size()>0)
+            goToListprovincesFragment();
+        else
+            getProvinces(iso);
+    }
+
+    public void goToListprovincesFragment()
+    {
+        /* ToDo */
     }
 
     //region Chiamate API
@@ -110,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     Provinces wResponse = (Provinces) response.body();
-                    Common.Database.Insert_Provinces(wResponse.getData());
+                    if (Common.Database.Insert_Provinces(wResponse.getData()))
+                        goToListprovincesFragment();
                 }
             }
 
