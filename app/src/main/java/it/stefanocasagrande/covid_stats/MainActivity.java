@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getTotalReport(MainFragment var, Date data_da_considerare) {
+    public void getTotalReport(MainFragment var, Date selected_date) {
 
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit= NetworkClient.getRetrofitClient();
@@ -194,10 +194,10 @@ public class MainActivity extends AppCompatActivity {
 
         Call call;
 
-        if (data_da_considerare==null)
+        if (selected_date==null)
             call = covidAPIs.getActualTotal(getString(R.string.Key));
         else
-            call = covidAPIs.getTotalbyDate(Date_To_String_yyyy_MM_DD(data_da_considerare), getString(R.string.Key));
+            call = covidAPIs.getTotalbyDate(Date_To_String_yyyy_MM_DD(selected_date), getString(R.string.Key));
 
         call.enqueue(new Callback() {
             @Override
@@ -226,48 +226,48 @@ public class MainActivity extends AppCompatActivity {
     public void Aggiorna_Report_Totali(MainFragment var)
     {
         new AlertDialog.Builder(this)
-                .setTitle("Data situazione")
-                .setMessage("Vuoi visualizzare ultimo report disponibile o selezionare data?")
-                .setPositiveButton("Ultimo disponibile", (dialog2, which) ->
+                .setTitle(getString(R.string.Refresh_Data))
+                .setMessage(getString(R.string.Alert_Refresh_ChangeDay))
+                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) ->
                         getTotalReport(var, null)
                 )
-                .setNegativeButton("Selezionare data", (dialog2, which) ->
-                        Setta_Data(var)
+                .setNegativeButton(getString(R.string.Title_Date_Change), (dialog2, which) ->
+                        Select_Date(var)
                 )
                 .show();
     }
 
     //region Dialog Scelta Data
 
-    public void Setta_Data(MainFragment var)
+    public void Select_Date(MainFragment var)
     {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Inserisci data");
+        alert.setTitle(getString(R.string.Title_Date_Change));
         alert.setView(R.layout.edit_date_style);
-        alert.setPositiveButton("Conferma", (dialog, whichButton) -> {
+        alert.setPositiveButton(getString(R.string.Confirm), (dialog, whichButton) -> {
 
-            if (et_data_consegna.getText().toString().equals(""))
+            if (et_data.getText().toString().equals(""))
             {
-                Toast.makeText(this, "Nessuna data indicata", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.No_Date), Toast.LENGTH_LONG).show();
                 return;
             }
 
             try {
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                Date date = format.parse(et_data_consegna.getText().toString());
+                Date date = format.parse(et_data.getText().toString());
 
                 getTotalReport(var, date);
             }
             catch (ParseException ex)
             {
-                Toast.makeText(this, "Data non valida", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.Invalid_Date), Toast.LENGTH_LONG).show();
             }
         });
 
-        alert.setNegativeButton("Annulla", null);
+        alert.setNegativeButton(getString(R.string.Undo), null);
         AlertDialog dd = alert.show();
 
-        et_data_consegna = dd.findViewById(R.id.et_data_consegna);
+        et_data = dd.findViewById(R.id.et_data);
 
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
             myCalendar.set(Calendar.YEAR, year);
@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
             updateLabel();
         };
 
-        et_data_consegna.setOnClickListener((View v)->
+        et_data.setOnClickListener((View v)->
                 new DatePickerDialog(this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show()
@@ -284,13 +284,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     Calendar myCalendar = Calendar.getInstance();
-    TextView et_data_consegna;
+    TextView et_data;
 
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
-        et_data_consegna.setText(sdf.format(myCalendar.getTime()));
+        et_data.setText(sdf.format(myCalendar.getTime()));
     }
 
     //endregion

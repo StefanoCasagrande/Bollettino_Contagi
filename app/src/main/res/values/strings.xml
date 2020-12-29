@@ -33,4 +33,15 @@
     <string name="Title_active_diff">Active diff:</string>
 
     <string name="Button_Refresh_ChangeDay">REFRESH DATA / CHANGE DAY</string>
+
+    <string name="Date_Hint">Select date..</string>
+    <string name="Invalid_Date">Invalid Date</string>
+    <string name="No_Date">No date selected</string>
+    <string name="Refresh_Data">Refresh data</string>
+    <string name="Title_Date_Change">Select new Date..</string>
+    <string name="Last_Avaible">Last Available</string>
+    <string name="Alert_Refresh_ChangeDay">Want to refresh last available data or select a new date?</string>
+
+    <string name="Confirm">Confirm</string>
+    <string name="Undo">Undo</string>
 </resources>
