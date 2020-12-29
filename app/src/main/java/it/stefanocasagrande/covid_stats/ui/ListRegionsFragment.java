@@ -26,7 +26,7 @@ import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
-    ListView ls_stati;
+    ListView list;
     EditText textFilter;
     private Regions_Adapter adapter;
     private List<Data_Regions> full_list;
@@ -54,7 +54,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cerca, container, false);
 
-        ls_stati = v.findViewById(R.id.listView);
+        list = v.findViewById(R.id.listView);
         textFilter = v.findViewById(R.id.cercaEditText);
 
         textFilter.addTextChangedListener(new TextWatcher() {
@@ -71,22 +71,22 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
             @Override
             public void afterTextChanged(Editable s) {
                 String filter = s.toString();
-                Carica_Dati(filter);
+                Load_Data(filter);
             }
         });
 
         full_list = Common.Database.get_Nations();
-        Carica_Dati("");
+        Load_Data("");
 
         return v;
     }
 
-    public void Carica_Dati(String filter)
+    public void Load_Data(String filter)
     {
-        List<Data_Regions> lista = new ArrayList<>();
+        List<Data_Regions> list_to_load = new ArrayList<>();
 
         if (filter==null || filter.equals(""))
-            lista = full_list;
+            list_to_load = full_list;
         else
         {
             for(Data_Regions var : full_list)
@@ -94,14 +94,14 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
                 if (filter!=null && !filter.equals(""))
                 {
                     if (var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
-                        lista.add(var);
+                        list_to_load.add(var);
                 }
             }
         }
 
-        adapter = new Regions_Adapter(getActivity(), R.layout.single_item,lista);
-        ls_stati.setAdapter(adapter);
-        ls_stati.setOnItemClickListener((parent, view, position, id)-> {
+        adapter = new Regions_Adapter(getActivity(), R.layout.single_item,list_to_load);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener((parent, view, position, id)-> {
 
             Data_Regions nation_selected = adapter.getItemList(position);
 
