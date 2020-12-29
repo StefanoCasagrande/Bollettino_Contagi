@@ -7,9 +7,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_info">Info..</string>
 
-    <string name="menu_home">Situazione attuale</string>
-    <string name="menu_search">Cerca..</string>
-    <string name="menu_gps">Posizione GPS</string>
+    <string name="menu_home">Current Situation</string>
+    <string name="menu_search">Search..</string>
+    <string name="menu_gps">Use GPS</string>
 
     <string name="look_for_hint">Looking for..</string>
 
@@ -21,4 +21,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="ListProvincesFragment">ListProvincesFragment</string>
+
+    <string name="Title_Data_About_Day">Info related to day:</string>
+    <string name="Title_Confirmed_Cases">Confirmed Cases:</string>
+    <string name="Title_Confirmed_Cases_Diff">Confirmed Cases diff:</string>
+    <string name="Title_deaths">Deaths:</string>
+    <string name="Title_deaths_diff">Deaths diff:</string>
+    <string name="Title_recovered">Recoverd:</string>
+    <string name="Title_recovered_diff">Recoverd diff:</string>
+    <string name="Title_active">Active:</string>
+    <string name="Title_active_diff">Active diff:</string>
+
+    <string name="Button_Refresh_ChangeDay">REFRESH DATA / CHANGE DAY</string>
 </resources>
