@@ -16,14 +16,14 @@ import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
 
 public class Regions_Adapter extends ArrayAdapter<Data_Regions> {
 
-    private List<Data_Regions> Lista;
+    private List<Data_Regions> list;
     private Context context;
 
     public Regions_Adapter(Context v_context, int resource, List<Data_Regions> objects) {
         super(v_context, resource, objects);
 
         context = v_context;
-        Lista = objects;
+        list = objects;
     }
 
     private static class ViewHolder {
@@ -33,7 +33,7 @@ public class Regions_Adapter extends ArrayAdapter<Data_Regions> {
     }
 
     public Data_Regions getItemList(int position) {
-        return Lista.get(position);
+        return list.get(position);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class Regions_Adapter extends ArrayAdapter<Data_Regions> {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
 
-        mViewHolder.mainText.setText(Lista.get(position).name);
-        mViewHolder.secondText.setText(String.format("ISO code %s", Lista.get(position).iso));
+        mViewHolder.mainText.setText(list.get(position).name);
+        mViewHolder.secondText.setText(String.format("ISO code %s", list.get(position).iso));
 
         return convertView;
     }
