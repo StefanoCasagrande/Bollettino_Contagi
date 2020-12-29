@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,6 +36,7 @@ import it.stefanocasagrande.covid_stats.Network.NetworkClient;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
+import it.stefanocasagrande.covid_stats.ui.ListprovincesFragment;
 import it.stefanocasagrande.covid_stats.ui.MainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,8 +78,16 @@ public class MainActivity extends AppCompatActivity {
 
         Common.Database = new DB(this);
 
-        if (Common.Database.get_Nations().size()==0)
-            getNations();
+        if (getString(R.string.Key)==null || getString(R.string.Key).equals(""))
+            Toast.makeText(this, getString(R.string.key_missing), Toast.LENGTH_LONG).show();
+        else if (Common.Database.get_Nations().size()==0)
+                getNations();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Toast.makeText(this,getString(R.string.To_Do), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -96,17 +107,28 @@ public class MainActivity extends AppCompatActivity {
     public void List_Provinces(String iso)
     {
         if (Common.Database.get_Provinces(iso).size()>0)
-            goToListprovincesFragment();
+            goToListprovincesFragment(iso);
         else
             getProvinces(iso);
     }
 
-    public void goToListprovincesFragment()
+    public void goToListprovincesFragment(String iso_code)
     {
-        /* ToDo */
+        Fragment fragment = ListprovincesFragment.newInstance(iso_code);
+        String tag=getString(R.string.ListProvincesFragment);
+        Show_Fragment(fragment, tag);
     }
 
-    //region Chiamate API
+    public void Show_Fragment(Fragment fragment, String tag)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment, tag)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
+    //region API Call
 
     public void getProvinces(String iso)
     {
@@ -114,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         API covidAPIs = retrofit.create(API.class);
 
-        Call call = covidAPIs.getProvinces(iso, getString(R.string.chiave));
+        Call call = covidAPIs.getProvinces(iso, getString(R.string.Key));
 
         call.enqueue(new Callback() {
             @Override
@@ -125,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     Provinces wResponse = (Provinces) response.body();
                     if (Common.Database.Insert_Provinces(wResponse.getData()))
-                        goToListprovincesFragment();
+                        goToListprovincesFragment(iso);
                 }
             }
 
@@ -142,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
         API covidAPIs = retrofit.create(API.class);
 
-        Call call = covidAPIs.getregions(getString(R.string.chiave));
+        Call call = covidAPIs.getregions(getString(R.string.Key));
 
         call.enqueue(new Callback() {
             @Override
@@ -173,9 +195,9 @@ public class MainActivity extends AppCompatActivity {
         Call call;
 
         if (data_da_considerare==null)
-            call = covidAPIs.getActualTotal(getString(R.string.chiave));
+            call = covidAPIs.getActualTotal(getString(R.string.Key));
         else
-            call = covidAPIs.getTotalbyDate(Date_To_String_yyyy_MM_DD(data_da_considerare), getString(R.string.chiave));
+            call = covidAPIs.getTotalbyDate(Date_To_String_yyyy_MM_DD(data_da_considerare), getString(R.string.Key));
 
         call.enqueue(new Callback() {
             @Override

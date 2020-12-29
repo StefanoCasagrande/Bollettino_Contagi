@@ -10,6 +10,15 @@
     <string name="menu_home">Situazione attuale</string>
     <string name="menu_search">Cerca..</string>
     <string name="menu_gps">Posizione GPS</string>
+
+    <string name="look_for_hint">Looking for..</string>
+
+    <string name="To_Do">Still working on it..</string>
+    <string name="key_missing">Key is missing - Please add it to the resources</string>
+
+    <string name="Key"></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="ListProvincesFragment">ListProvincesFragment</string>
 </resources>

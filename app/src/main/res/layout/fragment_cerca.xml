@@ -15,7 +15,7 @@
         android:id="@+id/cercaEditText"
         android:layout_width="match_parent"
         android:lines="1"
-        android:hint="Cerca..."
+        android:hint="@string/look_for_hint"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_marginBottom="0dp"/>
