@@ -30,7 +30,7 @@ public class DB extends SQLiteOpenHelper {
         String sql_query="CREATE TABLE NATIONS ( ISO nvarchar(3), NAME nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE PROVINCES ( ISO nvarchar(3), PROVINCE nvarchar(150))";
+        sql_query="CREATE TABLE PROVINCES ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
     }
@@ -152,7 +152,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Provinces> lista = new ArrayList<>();
 
-        String sql_query="SELECT ISO, PROVINCE from PROVINCES ";
+        String sql_query="SELECT ISO, PROVINCE, NAME from ( select ISO, PROVINCE, NAME from PROVINCES group by ISO, PROVINCE, NAME) PROVINCES ";
         sql_query+= " WHERE ISO= " + Validate_String(iso);
         sql_query += " order by PROVINCE";
 
@@ -163,6 +163,7 @@ public class DB extends SQLiteOpenHelper {
 
                 var.iso = c.getString(0);
                 var.province = c.getString(1);
+                var.name = c.getString(2);
                 lista.add(var);
 
             } while(c.moveToNext());
@@ -183,13 +184,13 @@ public class DB extends SQLiteOpenHelper {
 
             for (Data_Provinces var : lista)
             {
-                if (var.province!=null && !var.province.equals(""))
-                    var.province="general";
+                if (var.province==null || var.province.equals(""))
+                    var.province=var.name;
 
-                sql_insert_values.add(String.format("(%s, %s)", Validate_String(var.iso), Validate_String(var.province)));
+                sql_insert_values.add(String.format("(%s, %s, %s)", Validate_String(var.iso), Validate_String(var.province), Validate_String(var.name)));
             }
 
-            return Insert_Multi("INSERT INTO PROVINCES ( ISO, PROVINCE ) VALUES ", sql_insert_values);
+            return Insert_Multi("INSERT INTO PROVINCES ( ISO, PROVINCE, NAME ) VALUES ", sql_insert_values);
         }
         else
             return false;
