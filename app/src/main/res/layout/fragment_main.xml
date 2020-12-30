@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.MainFragment">
 
     <LinearLayout
@@ -21,6 +22,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title_Region"
+                        />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_region"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -214,6 +238,27 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/tv_active_diff"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title_fatality"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_fatality_rate"/>
 
                 </LinearLayout>
 
