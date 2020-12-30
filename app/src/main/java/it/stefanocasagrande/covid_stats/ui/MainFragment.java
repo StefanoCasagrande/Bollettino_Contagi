@@ -14,6 +14,7 @@ import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 /**
@@ -32,16 +33,10 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
     TextView tv_recovered_diff;
     TextView tv_active;
     TextView tv_active_diff;
+    TextView tv_fatality_rate;
 
     public MainFragment() {
         // Required empty public constructor
-    }
-
-    public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -64,9 +59,12 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         tv_recovered_diff = v.findViewById(R.id.tv_recovered_diff);
         tv_active = v.findViewById(R.id.tv_active);
         tv_active_diff = v.findViewById(R.id.tv_active_diff);
+        tv_fatality_rate = v.findViewById(R.id.tv_fatality_rate);
+        TextView tv_region = v.findViewById(R.id.tv_region);
+        tv_region.setText(getString(R.string.World));
 
-        Button btn_aggiorna = v.findViewById(R.id.btn_refresh);
-        btn_aggiorna.setOnClickListener(this);
+        Button btn_refresh = v.findViewById(R.id.btn_refresh);
+        btn_refresh.setOnClickListener(this);
 
         ((MainActivity) getActivity()).getTotalReport(this, null);
 
@@ -89,15 +87,15 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
 
         tv_active.setText(String.valueOf(wResponse.getData().getactive()));
         tv_active_diff.setText(String.valueOf(wResponse.getData().getactive_diff()));
+
+        tv_fatality_rate.setText(String.valueOf(wResponse.getData().getfatality_rate()));
     }
 
     @Override
-    public void newNationsAvailable(Regions wResponse) {
-
-    }
+    public void newProvinceReportAvailable(Province_Response wResponse) {}
 
     @Override
     public void onClick(View view) {
-        ((MainActivity) getActivity()).Aggiorna_Report_Totali(this);
+        ((MainActivity) getActivity()).Update_World_Report(this);
     }
 }

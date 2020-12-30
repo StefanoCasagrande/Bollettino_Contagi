@@ -174,7 +174,7 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
-    public boolean Insert_Provinces(List<Data_Provinces> lista) {
+    public boolean Insert_Provinces(List<Data_Provinces> lista, Context ctx) {
         if (lista.size() == 0)
             return false;
 
@@ -185,7 +185,7 @@ public class DB extends SQLiteOpenHelper {
             for (Data_Provinces var : lista)
             {
                 if (var.province==null || var.province.equals(""))
-                    var.province=var.name;
+                    var.province=ctx.getString(R.string.General);
 
                 sql_insert_values.add(String.format("(%s, %s, %s)", Validate_String(var.iso), Validate_String(var.province), Validate_String(var.name)));
             }

@@ -22,6 +22,7 @@ import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 public class ListRegionsFragment extends Fragment implements Covid_Interface {
@@ -111,14 +112,8 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
     }
 
     @Override
-    public void newReportAvailable(Total_Response wResponse) {
-
-    }
+    public void newReportAvailable(Total_Response wResponse) {}
 
     @Override
-    public void newNationsAvailable(Regions wResponse) {
-
-
-
-    }
+    public void newProvinceReportAvailable(Province_Response wResponse) {}
 }

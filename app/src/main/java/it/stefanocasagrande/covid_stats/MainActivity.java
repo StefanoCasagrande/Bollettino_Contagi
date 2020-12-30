@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import it.stefanocasagrande.covid_stats.Common.Common;
@@ -35,9 +36,11 @@ import it.stefanocasagrande.covid_stats.Network.API;
 import it.stefanocasagrande.covid_stats.Network.NetworkClient;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 import it.stefanocasagrande.covid_stats.ui.ListprovincesFragment;
 import it.stefanocasagrande.covid_stats.ui.MainFragment;
+import it.stefanocasagrande.covid_stats.ui.ProvinceReportFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -112,6 +115,13 @@ public class MainActivity extends AppCompatActivity {
             getProvinces(iso);
     }
 
+    public void goToProvinceReport(String iso, String province)
+    {
+        Fragment fragment = ProvinceReportFragment.newInstance(iso, null, province);
+        String tag=getString(R.string.ProvinceReportFragment);
+        Show_Fragment(fragment, tag);
+    }
+
     public void goToListprovincesFragment(String iso_code)
     {
         Fragment fragment = ListprovincesFragment.newInstance(iso_code);
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     Provinces wResponse = (Provinces) response.body();
-                    if (Common.Database.Insert_Provinces(wResponse.getData()))
+                    if (Common.Database.Insert_Provinces(wResponse.getData(), getApplicationContext()))
                         goToListprovincesFragment(iso);
                 }
             }
@@ -221,9 +231,58 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void getReportByProvince(String iso, Date selected_date, String province, ProvinceReportFragment var)
+    {
+        //Obtain an instance of Retrofit by calling the static method.
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API covidAPIs = retrofit.create(API.class);
+
+        Call call;
+
+        if (selected_date == null)
+            call = covidAPIs.getTotalByProvinces(iso, province, getString(R.string.Key));
+        else
+            call = covidAPIs.getTotalByProvinces_Date(Date_To_String_yyyy_MM_DD(selected_date), iso, province, getString(R.string.Key));
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    Province_Response wResponse = (Province_Response) response.body();
+
+                    if (var.isVisible())
+                        var.newProvinceReportAvailable(wResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     //endregion
 
-    public void Aggiorna_Report_Totali(MainFragment var)
+    public void Update_Province_Report(String iso, String province, ProvinceReportFragment var)
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.Refresh_Data))
+                .setMessage(getString(R.string.Alert_Refresh_ChangeDay))
+                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) ->
+                        getReportByProvince(iso, null, province, var)
+                )
+                .setNegativeButton(getString(R.string.Title_Date_Change), (dialog2, which) ->
+                        Select_Date(var, iso, province)
+                )
+                .show();
+    }
+
+    public void Update_World_Report(MainFragment var)
     {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.Refresh_Data))
@@ -232,14 +291,14 @@ public class MainActivity extends AppCompatActivity {
                         getTotalReport(var, null)
                 )
                 .setNegativeButton(getString(R.string.Title_Date_Change), (dialog2, which) ->
-                        Select_Date(var)
+                        Select_Date(var, null, null)
                 )
                 .show();
     }
 
     //region Dialog Scelta Data
 
-    public void Select_Date(MainFragment var)
+    public void Select_Date(Fragment var, String iso, String province)
     {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getString(R.string.Title_Date_Change));
@@ -256,7 +315,10 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                 Date date = format.parse(et_data.getText().toString());
 
-                getTotalReport(var, date);
+                if (var.getTag()!=null && var.getTag().equals(getString(R.string.ProvinceReportFragment)))
+                    getReportByProvince(iso, date, province, (ProvinceReportFragment) var);
+                else
+                    getTotalReport((MainFragment) var, date);
             }
             catch (ParseException ex)
             {

@@ -17,6 +17,7 @@ import java.util.List;
 
 import it.stefanocasagrande.covid_stats.Adapters.Provinces_Adapter;
 import it.stefanocasagrande.covid_stats.Common.Common;
+import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 
@@ -102,6 +103,12 @@ public class ListprovincesFragment extends Fragment {
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id)-> {
 
+            String province = adapter.getItemList(position).province;
+
+            if (province.equals(getString(R.string.General)))
+                province=null;
+
+            ((MainActivity) getActivity()).goToProvinceReport(iso_code, province);
 
         });
     }

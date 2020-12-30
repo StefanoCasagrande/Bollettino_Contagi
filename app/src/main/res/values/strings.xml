@@ -21,8 +21,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="ListProvincesFragment">ListProvincesFragment</string>
+    <string name="ProvinceReportFragment">ProvinceReportFragment</string>
 
-    <string name="Title_Data_About_Day">Info related to day:</string>
+    <string name="Title_Data_About_Day">Date:</string>
     <string name="Title_Confirmed_Cases">Confirmed Cases:</string>
     <string name="Title_Confirmed_Cases_Diff">Confirmed Cases diff:</string>
     <string name="Title_deaths">Deaths:</string>
@@ -31,6 +32,8 @@
     <string name="Title_recovered_diff">Recoverd diff:</string>
     <string name="Title_active">Active:</string>
     <string name="Title_active_diff">Active diff:</string>
+    <string name="Title_fatality">Fatality Rate:</string>
+    <string name="Title_Region">Info related to region:</string>
 
     <string name="Button_Refresh_ChangeDay">REFRESH DATA / CHANGE DAY</string>
 
@@ -44,4 +47,7 @@
 
     <string name="Confirm">Confirm</string>
     <string name="Undo">Undo</string>
+
+    <string name="General">General</string>
+    <string name="World">World</string>
 </resources>
