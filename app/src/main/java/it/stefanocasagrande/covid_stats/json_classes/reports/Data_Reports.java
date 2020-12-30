@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
+
 public class Data_Reports {
 
     @SerializedName("date")
@@ -117,6 +119,14 @@ public class Data_Reports {
 
     public double getfatality_rate() {
         return fatality_rate;
+    }
+
+    @SerializedName("region")
+    @Expose
+    private Data_Provinces region;
+
+    public Data_Provinces getregion() {
+        return region;
     }
 
 }
