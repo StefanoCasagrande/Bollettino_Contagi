@@ -21,7 +21,6 @@ import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
-import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
@@ -34,13 +33,6 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
     public ListRegionsFragment() {
         // Required empty public constructor
-    }
-
-    public static ListRegionsFragment newInstance() {
-        ListRegionsFragment fragment = new ListRegionsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

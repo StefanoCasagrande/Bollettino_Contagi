@@ -13,15 +13,9 @@ import android.widget.TextView;
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
-import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainFragment extends Fragment implements Covid_Interface, View.OnClickListener {
 
     TextView tv_date;
