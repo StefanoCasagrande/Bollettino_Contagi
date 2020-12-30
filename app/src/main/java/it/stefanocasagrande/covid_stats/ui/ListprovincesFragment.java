@@ -75,7 +75,7 @@ public class ListprovincesFragment extends Fragment {
             }
         });
 
-        full_list = Common.Database.get_Provinces(iso_code);
+        full_list = Common.Database.get_Provinces(iso_code, getActivity());
         Load_Data("");
 
         return v;

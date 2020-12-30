@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
 
@@ -147,14 +148,14 @@ public class DB extends SQLiteOpenHelper {
 
     //region Provinces
 
-    public List<Data_Provinces> get_Provinces(String iso)
+    public List<Data_Provinces> get_Provinces(String iso, Context cxt)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Provinces> lista = new ArrayList<>();
 
         String sql_query="SELECT ISO, PROVINCE, NAME from ( select ISO, PROVINCE, NAME from PROVINCES group by ISO, PROVINCE, NAME) PROVINCES ";
         sql_query+= " WHERE ISO= " + Validate_String(iso);
-        sql_query += " order by PROVINCE";
+        sql_query += String.format(" order by CASE WHEN PROVINCE=%s then 0 else 1 END, PROVINCE ", Validate_String(cxt.getString(R.string.General)));
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){

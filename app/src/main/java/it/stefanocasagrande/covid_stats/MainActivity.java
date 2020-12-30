@@ -27,7 +27,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import it.stefanocasagrande.covid_stats.Common.Common;
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void List_Provinces(String iso)
     {
-        if (Common.Database.get_Provinces(iso).size()>0)
+        if (Common.Database.get_Provinces(iso, this).size()>0)
             goToListprovincesFragment(iso);
         else
             getProvinces(iso);
