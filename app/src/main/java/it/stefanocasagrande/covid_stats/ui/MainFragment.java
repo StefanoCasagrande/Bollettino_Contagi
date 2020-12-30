@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
+
+import static it.stefanocasagrande.covid_stats.Common.Common.AddDotToInteger;
 
 public class MainFragment extends Fragment implements Covid_Interface, View.OnClickListener {
 
@@ -70,19 +74,20 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
 
         tv_date.setText(wResponse.getData().getdate_dd_MM_yyyy());
 
-        tv_confirmed_cases.setText(String.valueOf(wResponse.getData().getconfirmed()));
-        tv_confirmed_diff.setText(String.valueOf(wResponse.getData().getconfirmed_diff()));
+        tv_confirmed_cases.setText(AddDotToInteger(wResponse.getData().getconfirmed()));
+        tv_confirmed_diff.setText(AddDotToInteger(wResponse.getData().getconfirmed_diff()));
 
-        tv_deaths.setText(String.valueOf(wResponse.getData().getdeaths()));
-        tv_deaths_diff.setText(String.valueOf(wResponse.getData().getdeaths_diff()));
+        tv_deaths.setText(AddDotToInteger(wResponse.getData().getdeaths()));
+        tv_deaths_diff.setText(AddDotToInteger(wResponse.getData().getdeaths_diff()));
 
-        tv_recovered.setText(String.valueOf(wResponse.getData().getrecovered()));
-        tv_recovered_diff.setText(String.valueOf(wResponse.getData().getrecovered_diff()));
+        tv_recovered.setText(AddDotToInteger(wResponse.getData().getrecovered()));
+        tv_recovered_diff.setText(AddDotToInteger(wResponse.getData().getrecovered_diff()));
 
-        tv_active.setText(String.valueOf(wResponse.getData().getactive()));
-        tv_active_diff.setText(String.valueOf(wResponse.getData().getactive_diff()));
+        tv_active.setText(AddDotToInteger(wResponse.getData().getactive()));
+        tv_active_diff.setText(AddDotToInteger(wResponse.getData().getactive_diff()));
 
-        tv_fatality_rate.setText(String.valueOf(wResponse.getData().getfatality_rate()));
+        DecimalFormat df = new DecimalFormat("#.#####");
+        tv_fatality_rate.setText(df.format(wResponse.getData().getfatality_rate()));
     }
 
     @Override

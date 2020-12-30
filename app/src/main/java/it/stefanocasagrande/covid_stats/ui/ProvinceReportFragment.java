@@ -9,13 +9,17 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Data_Reports;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
+
+import static it.stefanocasagrande.covid_stats.Common.Common.AddDotToInteger;
 
 public class ProvinceReportFragment extends Fragment implements Covid_Interface, View.OnClickListener{
 
@@ -89,21 +93,76 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         {
             tv_date.setText(wResponse.getDatas().get(0).getdate_dd_MM_yyyy());
 
-            tv_confirmed_cases.setText(String.valueOf(wResponse.getDatas().get(0).getconfirmed()));
-            tv_confirmed_diff.setText(String.valueOf(wResponse.getDatas().get(0).getconfirmed_diff()));
+            tv_confirmed_cases.setText(AddDotToInteger(wResponse.getDatas().get(0).getconfirmed()));
+            tv_confirmed_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getconfirmed_diff()));
 
-            tv_deaths.setText(String.valueOf(wResponse.getDatas().get(0).getdeaths()));
-            tv_deaths_diff.setText(String.valueOf(wResponse.getDatas().get(0).getdeaths_diff()));
+            tv_deaths.setText(AddDotToInteger(wResponse.getDatas().get(0).getdeaths()));
+            tv_deaths_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getdeaths_diff()));
 
-            tv_recovered.setText(String.valueOf(wResponse.getDatas().get(0).getrecovered()));
-            tv_recovered_diff.setText(String.valueOf(wResponse.getDatas().get(0).getrecovered_diff()));
+            tv_recovered.setText(AddDotToInteger(wResponse.getDatas().get(0).getrecovered()));
+            tv_recovered_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff()));
 
-            tv_active.setText(String.valueOf(wResponse.getDatas().get(0).getactive()));
-            tv_active_diff.setText(String.valueOf(wResponse.getDatas().get(0).getactive_diff()));
+            tv_active.setText(AddDotToInteger(wResponse.getDatas().get(0).getactive()));
+            tv_active_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getactive_diff()));
 
-            tv_fatality_rate.setText(String.valueOf(wResponse.getDatas().get(0).getfatality_rate()));
+            DecimalFormat df = new DecimalFormat("#.#####");
+            tv_fatality_rate.setText(df.format(wResponse.getDatas().get(0).getfatality_rate()));
 
-            tv_region.setText(String.format("%s (%s)", wResponse.getDatas().get(0).getregion().province, wResponse.getDatas().get(0).getregion().name));
+            if (wResponse.getDatas().get(0).getregion().province!=null && !wResponse.getDatas().get(0).getregion().province.equals(""))
+                tv_region.setText(String.format("%s (%s)", wResponse.getDatas().get(0).getregion().province, wResponse.getDatas().get(0).getregion().name));
+            else
+                tv_region.setText(wResponse.getDatas().get(0).getregion().name);
+        }
+        else
+        {
+            tv_date.setText(wResponse.getDatas().get(0).getdate_dd_MM_yyyy());
+            tv_region.setText(wResponse.getDatas().get(0).getregion().name);
+
+            int confirmed=0;
+            int confirmed_diff=0;
+
+            int deaths=0;
+            int deaths_diff=0;
+
+            int recovered=0;
+            int recovered_diff=0;
+
+            int active=0;
+            int active_diff=0;
+
+            double fatality_rate=0;
+
+            for(Data_Reports var : wResponse.getDatas())
+            {
+                confirmed += var.getconfirmed();
+                confirmed_diff += var.getconfirmed_diff();
+
+                deaths += var.getdeaths();
+                deaths_diff += var.getdeaths_diff();
+
+                recovered += var.getrecovered();
+                recovered_diff += var.getrecovered_diff();
+
+                active += var.getactive();
+                active_diff += var.getactive_diff();
+
+                fatality_rate+=var.getfatality_rate();
+            }
+
+            tv_confirmed_cases.setText(AddDotToInteger(confirmed));
+            tv_confirmed_diff.setText(AddDotToInteger(confirmed_diff));
+
+            tv_deaths.setText(AddDotToInteger(deaths));
+            tv_deaths_diff.setText(AddDotToInteger(deaths_diff));
+
+            tv_recovered.setText(AddDotToInteger(recovered));
+            tv_recovered_diff.setText(AddDotToInteger(recovered_diff));
+
+            tv_active.setText(AddDotToInteger(active));
+            tv_active_diff.setText(AddDotToInteger(active_diff));
+
+            DecimalFormat df = new DecimalFormat("#.#####");
+            tv_fatality_rate.setText(df.format(fatality_rate/wResponse.getDatas().size()));
         }
 
     }
