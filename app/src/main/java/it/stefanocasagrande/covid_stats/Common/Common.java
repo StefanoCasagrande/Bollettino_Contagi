@@ -7,7 +7,7 @@ public class Common {
     public static String AddDotToInteger(Integer value)
     {
         StringBuilder dotfiedNum= new StringBuilder();
-        String inputNum = String.valueOf(value);
+        String inputNum = String.valueOf(Math.abs(value));
 
         int numLength = inputNum.length();
         for (int i=0; i<numLength; i++) {
@@ -17,6 +17,9 @@ public class Common {
             dotfiedNum.append(inputNum.charAt(i));
         }
 
-        return dotfiedNum.toString();
+        if (value<0)
+            return String.format("-%s",dotfiedNum.toString());
+        else
+            return dotfiedNum.toString();
     }
 }
