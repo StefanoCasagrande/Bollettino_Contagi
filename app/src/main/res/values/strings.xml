@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Covid_Stats</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_info">Info..</string>
+    <string name="app_name" translatable="false">Covid_Stats</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_info" translatable="false">Info..</string>
 
     <string name="menu_home">World Situation</string>
     <string name="menu_search">Search..</string>
@@ -13,18 +13,18 @@
 
     <string name="look_for_hint">Looking for..</string>
 
-    <string name="To_Do">Still working on it..</string>
+    <string name="To_Do" translatable="false">Still working on it..</string>
     <string name="key_missing">Key is missing - Please add it to the resources</string>
 
     <string name="Key"></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="ListProvincesFragment">ListProvincesFragment</string>
-    <string name="ProvinceReportFragment">ProvinceReportFragment</string>
+    <string name="ListProvincesFragment" translatable="false">ListProvincesFragment</string>
+    <string name="ProvinceReportFragment" translatable="false">ProvinceReportFragment</string>
 
-    <string name="Placeholder_new">New cases: 123.405</string>
-    <string name="Placeholder_total">Total: 8.000.123.405</string>
+    <string name="Placeholder_new" translatable="false">New cases: 123.405</string>
+    <string name="Placeholder_total" translatable="false">Total: 8.000.123.405</string>
 
     <string name="Title_Total">Total:</string>
     <string name="Title_Confirmed_Cases_Diff">New Cases:</string>

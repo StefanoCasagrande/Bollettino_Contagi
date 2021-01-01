@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="menu_home">Situazione generale</string>
+    <string name="menu_search">Ricerca..</string>
+    <string name="menu_gps">Utilizza GPS</string>
+
+    <string name="look_for_hint">Cerca..</string>
+
+    <string name="key_missing">Key non è indicato - aggiungilo nelle risorse</string>
+
+    <string name="Title_Total">Totale:</string>
+    <string name="Title_Confirmed_Cases_Diff">Nuovi casi:</string>
+    <string name="Title_deaths_diff">Decessi:</string>
+    <string name="Title_recovered_diff">Guariti:</string>
+    <string name="Title_active">Positivi:</string>
+    <string name="Title_active_diff">Incremento:</string>
+    <string name="Title_fatality">Tasso di fatalità:</string>
+    <string name="fatality_explanation">IFR = Decessi / Casi</string>
+
+    <string name="Button_Refresh_ChangeDay">RICARICA DATI / CAMBIA DATA</string>
+
+    <string name="Date_Hint">Seleziona giorno..</string>
+    <string name="Invalid_Date">Data non valida</string>
+    <string name="No_Date">Nessuna data indicata</string>
+    <string name="Refresh_Data">Aggiorna data</string>
+    <string name="Title_Date_Change">Seleziona nuova data..</string>
+    <string name="Last_Avaible">Ultimo disponibile</string>
+    <string name="Alert_Refresh_ChangeDay">Vuoi aggiornare i dati all\'ultimo disponibile o selezionare nuova data?</string>
+
+    <string name="Confirm">Conferma</string>
+    <string name="Undo">Annulla</string>
+
+    <string name="General">General</string>
+    <string name="World">Mondo</string>
+</resources>
