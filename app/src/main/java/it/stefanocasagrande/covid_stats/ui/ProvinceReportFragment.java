@@ -93,20 +93,20 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         {
             tv_date.setText(wResponse.getDatas().get(0).getdate_dd_MM_yyyy());
 
-            tv_confirmed_cases.setText(AddDotToInteger(wResponse.getDatas().get(0).getconfirmed()));
-            tv_confirmed_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getconfirmed_diff()));
+            tv_confirmed_cases.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getconfirmed())));
+            tv_confirmed_diff.setText(String.format("%s +%s", getString(R.string.Title_Confirmed_Cases_Diff), AddDotToInteger(wResponse.getDatas().get(0).getconfirmed_diff())));
 
-            tv_deaths.setText(AddDotToInteger(wResponse.getDatas().get(0).getdeaths()));
-            tv_deaths_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getdeaths_diff()));
+            tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getdeaths())));
+            tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(wResponse.getDatas().get(0).getdeaths_diff())));
 
-            tv_recovered.setText(AddDotToInteger(wResponse.getDatas().get(0).getrecovered()));
-            tv_recovered_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff()));
+            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getrecovered())));
+            tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff())));
 
-            tv_active.setText(AddDotToInteger(wResponse.getDatas().get(0).getactive()));
-            tv_active_diff.setText(AddDotToInteger(wResponse.getDatas().get(0).getactive_diff()));
+            tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getDatas().get(0).getactive())));
+            tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(wResponse.getDatas().get(0).getactive_diff())));
 
-            DecimalFormat df = new DecimalFormat("#.#####");
-            tv_fatality_rate.setText(df.format(wResponse.getDatas().get(0).getfatality_rate()));
+            DecimalFormat df = new DecimalFormat("#.##");
+            tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format(wResponse.getDatas().get(0).getfatality_rate()*100)));
 
             if (wResponse.getDatas().get(0).getregion().province!=null && !wResponse.getDatas().get(0).getregion().province.equals(""))
                 tv_region.setText(String.format("%s (%s)", wResponse.getDatas().get(0).getregion().province, wResponse.getDatas().get(0).getregion().name));
@@ -149,20 +149,20 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
                 fatality_rate+=var.getfatality_rate();
             }
 
-            tv_confirmed_cases.setText(AddDotToInteger(confirmed));
-            tv_confirmed_diff.setText(AddDotToInteger(confirmed_diff));
+            tv_confirmed_cases.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(confirmed)));
+            tv_confirmed_diff.setText(String.format("%s +%s", getString(R.string.Title_Confirmed_Cases_Diff), AddDotToInteger(confirmed_diff)));
 
-            tv_deaths.setText(AddDotToInteger(deaths));
-            tv_deaths_diff.setText(AddDotToInteger(deaths_diff));
+            tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(deaths)));
+            tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(deaths_diff)));
 
-            tv_recovered.setText(AddDotToInteger(recovered));
-            tv_recovered_diff.setText(AddDotToInteger(recovered_diff));
+            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(recovered)));
+            tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(recovered_diff)));
 
-            tv_active.setText(AddDotToInteger(active));
-            tv_active_diff.setText(AddDotToInteger(active_diff));
+            tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(active)));
+            tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(active_diff)));
 
-            DecimalFormat df = new DecimalFormat("#.#####");
-            tv_fatality_rate.setText(df.format(fatality_rate/wResponse.getDatas().size()));
+            DecimalFormat df = new DecimalFormat("#.##");
+            tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format((fatality_rate/wResponse.getDatas().size())*100)));
         }
 
     }

@@ -74,20 +74,20 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
 
         tv_date.setText(wResponse.getData().getdate_dd_MM_yyyy());
 
-        tv_confirmed_cases.setText(AddDotToInteger(wResponse.getData().getconfirmed()));
-        tv_confirmed_diff.setText(AddDotToInteger(wResponse.getData().getconfirmed_diff()));
+        tv_confirmed_cases.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getconfirmed())));
+        tv_confirmed_diff.setText(String.format("%s +%s", getString(R.string.Title_Confirmed_Cases_Diff), AddDotToInteger(wResponse.getData().getconfirmed_diff())));
 
-        tv_deaths.setText(AddDotToInteger(wResponse.getData().getdeaths()));
-        tv_deaths_diff.setText(AddDotToInteger(wResponse.getData().getdeaths_diff()));
+        tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getdeaths())));
+        tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(wResponse.getData().getdeaths_diff())));
 
-        tv_recovered.setText(AddDotToInteger(wResponse.getData().getrecovered()));
-        tv_recovered_diff.setText(AddDotToInteger(wResponse.getData().getrecovered_diff()));
+        tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getrecovered())));
+        tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getData().getrecovered_diff())));
 
-        tv_active.setText(AddDotToInteger(wResponse.getData().getactive()));
-        tv_active_diff.setText(AddDotToInteger(wResponse.getData().getactive_diff()));
+        tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getData().getactive())));
+        tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(wResponse.getData().getactive_diff())));
 
-        DecimalFormat df = new DecimalFormat("#.#####");
-        tv_fatality_rate.setText(df.format(wResponse.getData().getfatality_rate()));
+        DecimalFormat df = new DecimalFormat("#.##");
+        tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format(wResponse.getData().getfatality_rate()*100)));
     }
 
     @Override

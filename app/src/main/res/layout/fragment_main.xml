@@ -9,7 +9,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_marginTop="20dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -21,244 +22,342 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="20dp">
+                android:layout_margin="10dp">
 
+                <!--Location-->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_Region"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_region"
-                        />
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_region"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/tv_date"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/bluette"/>
+
+                <!-- New Cases -->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_Data_About_Day"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_date"
-                        />
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_confirmed_diff"
+                            android:text="@string/Placeholder_new"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/tv_confirmed_cases"
+                            android:text="@string/Placeholder_total"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/bluette"/>
+
+                <!--Healed-->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_Confirmed_Cases"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_confirmed_cases"
-                        />
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_recovered_diff"
+                            android:text="@string/Placeholder_new"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/tv_recovered"
+                            android:text="@string/Placeholder_total"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/bluette"/>
+
+                <!--Active-->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_Confirmed_Cases_Diff"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_confirmed_diff"
-                        />
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_active"
+                            android:text="@string/Placeholder_new"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/tv_active_diff"
+                            android:text="@string/Placeholder_total"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/bluette"/>
+
+                <!--Deaths-->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_deaths"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_deaths"/>
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_deaths_diff"
+                            android:text="@string/Placeholder_new"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/tv_deaths"
+                            android:text="@string/Placeholder_total"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/bluette"/>
+
+                <!--Fatality Rate-->
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/bluette"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Title_deaths_diff"/>
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_deaths_diff"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/teal_700"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_fatality_rate"
+                            android:text="@string/Placeholder_new"/>
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/teal_700"
+                            android:text="@string/fatality_explanation"/>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_recovered"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_recovered"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_recovered_diff"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_recovered_diff"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_active"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_active"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_active_diff"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_active_diff"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Title_fatality"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_fatality_rate"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 

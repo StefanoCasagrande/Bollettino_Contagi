@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bluette">#FF8E91DF</color>
+    <color name="C6C7DF">#FFC6C7DF</color>
 </resources>

@@ -23,17 +23,17 @@
     <string name="ListProvincesFragment">ListProvincesFragment</string>
     <string name="ProvinceReportFragment">ProvinceReportFragment</string>
 
-    <string name="Title_Data_About_Day">Date:</string>
-    <string name="Title_Confirmed_Cases">Confirmed Cases:</string>
-    <string name="Title_Confirmed_Cases_Diff">Confirmed Cases diff:</string>
-    <string name="Title_deaths">Deaths:</string>
-    <string name="Title_deaths_diff">Deaths diff:</string>
-    <string name="Title_recovered">Recoverd:</string>
-    <string name="Title_recovered_diff">Recoverd diff:</string>
-    <string name="Title_active">Active:</string>
-    <string name="Title_active_diff">Active diff:</string>
+    <string name="Placeholder_new">New cases: 123.405</string>
+    <string name="Placeholder_total">Total: 8.000.123.405</string>
+
+    <string name="Title_Total">Total:</string>
+    <string name="Title_Confirmed_Cases_Diff">New Cases:</string>
+    <string name="Title_deaths_diff">Deaths:</string>
+    <string name="Title_recovered_diff">Healed:</string>
+    <string name="Title_active">Positive:</string>
+    <string name="Title_active_diff">Increment:</string>
     <string name="Title_fatality">Fatality Rate:</string>
-    <string name="Title_Region">Info related to region:</string>
+    <string name="fatality_explanation">IFR = Deaths / Cases</string>
 
     <string name="Button_Refresh_ChangeDay">REFRESH DATA / CHANGE DAY</string>
 
