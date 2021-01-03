@@ -32,6 +32,7 @@ import java.util.Locale;
 import it.stefanocasagrande.covid_stats.Common.Common;
 import it.stefanocasagrande.covid_stats.Common.DB;
 import it.stefanocasagrande.covid_stats.Network.API;
+import it.stefanocasagrande.covid_stats.Network.CheckNetwork;
 import it.stefanocasagrande.covid_stats.Network.NetworkClient;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
@@ -78,12 +79,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.bringToFront();
 
+        CheckNetwork network = new CheckNetwork(getApplicationContext());
+        network.registerNetworkCallback();
+
         Common.Database = new DB(this);
 
         if (getString(R.string.Key)==null || getString(R.string.Key).equals(""))
             Toast.makeText(this, getString(R.string.key_missing), Toast.LENGTH_LONG).show();
         else if (Common.Database.get_Nations().size()==0)
+        {
+            if (GlobalVariables.isNetworkConnected)
                 getNations();
+            else
+                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -110,8 +120,12 @@ public class MainActivity extends AppCompatActivity {
     {
         if (Common.Database.get_Provinces(iso, this).size()>0)
             goToListprovincesFragment(iso);
-        else
-            getProvinces(iso);
+        else {
+            if (GlobalVariables.isNetworkConnected)
+                getProvinces(iso);
+            else
+                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goToProvinceReport(String iso, String province)
@@ -272,8 +286,12 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.Refresh_Data))
                 .setMessage(getString(R.string.Alert_Refresh_ChangeDay))
-                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) ->
-                        getReportByProvince(iso, null, province, var)
+                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) -> {
+                            if (GlobalVariables.isNetworkConnected)
+                                getReportByProvince(iso, null, province, var);
+                            else
+                                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+                        }
                 )
                 .setNegativeButton(getString(R.string.Title_Date_Change), (dialog2, which) ->
                         Select_Date(var, iso, province)
@@ -286,8 +304,12 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.Refresh_Data))
                 .setMessage(getString(R.string.Alert_Refresh_ChangeDay))
-                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) ->
-                        getTotalReport(var, null)
+                .setPositiveButton(getString(R.string.Last_Avaible), (dialog2, which) -> {
+                            if (GlobalVariables.isNetworkConnected)
+                                getTotalReport(var, null);
+                            else
+                                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+                        }
                 )
                 .setNegativeButton(getString(R.string.Title_Date_Change), (dialog2, which) ->
                         Select_Date(var, null, null)

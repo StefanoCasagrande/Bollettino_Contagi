@@ -23,8 +23,8 @@
     <string name="ListProvincesFragment" translatable="false">ListProvincesFragment</string>
     <string name="ProvinceReportFragment" translatable="false">ProvinceReportFragment</string>
 
-    <string name="Placeholder_new" translatable="false">New cases: 123.405</string>
-    <string name="Placeholder_total" translatable="false">Total: 8.000.123.405</string>
+    <string name="Placeholder_new" translatable="false">[Loading..]</string>
+    <string name="Placeholder_total" translatable="false">[Loading..]</string>
 
     <string name="Title_Total">Total:</string>
     <string name="Title_Confirmed_Cases_Diff">New Cases:</string>
@@ -50,4 +50,6 @@
 
     <string name="General">General</string>
     <string name="World">World</string>
+
+    <string name="Internet_Missing" translatable="false">Missing internet</string>
 </resources>
