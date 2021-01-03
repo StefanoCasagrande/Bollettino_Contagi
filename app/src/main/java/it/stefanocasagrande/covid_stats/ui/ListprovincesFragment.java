@@ -76,7 +76,18 @@ public class ListprovincesFragment extends Fragment {
         });
 
         full_list = Common.Database.get_Provinces(iso_code, getActivity());
-        Load_Data("");
+
+        if (full_list.size()==1)
+        {
+            String province = full_list.get(0).province;
+
+            if (province.equals(getString(R.string.General)))
+                province=null;
+
+            ((MainActivity) getActivity()).goToProvinceReport(iso_code, province);
+        }
+        else
+            Load_Data("");
 
         return v;
     }
