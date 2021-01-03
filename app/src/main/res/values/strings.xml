@@ -39,6 +39,7 @@
 
     <string name="Date_Hint">Select date..</string>
     <string name="Invalid_Date">Invalid Date</string>
+    <string name="Future_Date">If my calculations are correct, when this baby hits 88 miles per hour, you\'re gonna see some serious shit.</string>
     <string name="No_Date">No date selected</string>
     <string name="Refresh_Data">Refresh data</string>
     <string name="Title_Date_Change">Select new Date..</string>
@@ -52,4 +53,6 @@
     <string name="World">World</string>
 
     <string name="Internet_Missing" translatable="false">Missing internet</string>
+    <string name="No_Report_Available">No Report Available for the zone selected / date inserted</string>
+    <string name="API_Error" translatable="false">API Error - %1$s</string>
 </resources>

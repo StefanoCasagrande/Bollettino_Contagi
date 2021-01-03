@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -231,14 +231,16 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     Total_Response wResponse = (Total_Response) response.body();
 
-                    if (var.isVisible())
+                    if (wResponse.getData()==null)
+                        Toast.makeText(getApplicationContext(),getString(R.string.No_Report_Available), Toast.LENGTH_LONG).show();
+                    else if (var.isVisible())
                         var.newReportAvailable(wResponse);
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -274,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-                Toast.makeText(getApplicationContext(),String.format("Errore API - %s", t.getMessage()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -336,7 +338,9 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                 Date date = format.parse(et_data.getText().toString());
 
-                if (var.getTag()!=null && var.getTag().equals(getString(R.string.ProvinceReportFragment)))
+                if (date.after(new Date()))
+                    Toast.makeText(this, getString(R.string.Future_Date), Toast.LENGTH_LONG).show();
+                else if (var.getTag()!=null && var.getTag().equals(getString(R.string.ProvinceReportFragment)))
                     getReportByProvince(iso, date, province, (ProvinceReportFragment) var);
                 else
                     getTotalReport((MainFragment) var, date);

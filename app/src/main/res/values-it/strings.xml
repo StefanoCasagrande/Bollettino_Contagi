@@ -22,6 +22,8 @@
     <string name="Date_Hint">Seleziona giorno..</string>
     <string name="Invalid_Date">Data non valida</string>
     <string name="No_Date">Nessuna data indicata</string>
+    <string name="Future_Date">Se i miei calcoli sono esatti, quando questo aggeggio toccherà le 88 miglia orarie ne vedremo delle belle, Marty..</string>
+    <string name="No_Report_Available">Nessun report per la zona selezionata o data inserita</string>
     <string name="Refresh_Data">Aggiorna data</string>
     <string name="Title_Date_Change">Seleziona nuova data..</string>
     <string name="Last_Avaible">Ultimo disponibile</string>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -89,7 +90,12 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
     @Override
     public void newProvinceReportAvailable(Province_Response wResponse) {
 
-        if (wResponse.getDatas().size()==1)
+        if (wResponse.getDatas().size()==0)
+        {
+            Toast.makeText(getActivity(),getString(R.string.No_Report_Available), Toast.LENGTH_LONG).show();
+            ((MainActivity) getActivity()).goToListprovincesFragment(iso);
+        }
+        else if (wResponse.getDatas().size()==1)
         {
             tv_date.setText(wResponse.getDatas().get(0).getdate_dd_MM_yyyy());
 
