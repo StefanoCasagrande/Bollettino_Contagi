@@ -16,7 +16,7 @@
     <string name="To_Do" translatable="false">Still working on it..</string>
     <string name="key_missing">Key is missing - Please add it to the resources</string>
 
-    <string name="Key"></string>
+    <string name="Key" translatable="false"></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
