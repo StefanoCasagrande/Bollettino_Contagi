@@ -52,7 +52,7 @@
     <string name="General">General</string>
     <string name="World">World</string>
 
-    <string name="Internet_Missing" translatable="false">Missing internet</string>
+    <string name="Internet_Missing">No internet connection - A connection is needed</string>
     <string name="No_Report_Available">No Report Available for the zone selected / date inserted</string>
     <string name="API_Error" translatable="false">API Error - %1$s</string>
 </resources>
