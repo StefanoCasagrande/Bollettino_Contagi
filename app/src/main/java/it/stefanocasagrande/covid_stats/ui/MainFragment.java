@@ -84,7 +84,13 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getData().getrecovered_diff())));
 
         tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getData().getactive())));
-        tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(wResponse.getData().getactive_diff())));
+
+        int diff = wResponse.getData().getactive_diff();
+
+        if (diff>0)
+            tv_active_diff.setText(String.format("%s +%s", getString(R.string.Title_active_diff), AddDotToInteger(diff)));
+        else
+            tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(diff)));
 
         DecimalFormat df = new DecimalFormat("#.##");
         tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format(wResponse.getData().getfatality_rate()*100)));

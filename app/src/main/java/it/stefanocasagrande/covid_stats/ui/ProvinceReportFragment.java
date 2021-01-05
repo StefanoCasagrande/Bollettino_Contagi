@@ -109,7 +109,13 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
             tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff())));
 
             tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getDatas().get(0).getactive())));
-            tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(wResponse.getDatas().get(0).getactive_diff())));
+
+            int diff = wResponse.getDatas().get(0).getactive_diff();
+
+            if (diff>0)
+                tv_active_diff.setText(String.format("%s +%s", getString(R.string.Title_active_diff), AddDotToInteger(diff)));
+            else
+                tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(diff)));
 
             DecimalFormat df = new DecimalFormat("#.##");
             tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format(wResponse.getDatas().get(0).getfatality_rate()*100)));
@@ -165,7 +171,11 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
             tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(recovered_diff)));
 
             tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(active)));
-            tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(active_diff)));
+
+            if (active_diff>0)
+                tv_active_diff.setText(String.format("%s +%s", getString(R.string.Title_active_diff), AddDotToInteger(active_diff)));
+            else
+                tv_active_diff.setText(String.format("%s %s", getString(R.string.Title_active_diff), AddDotToInteger(active_diff)));
 
             DecimalFormat df = new DecimalFormat("#.##");
             tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format((fatality_rate/wResponse.getDatas().size())*100)));
