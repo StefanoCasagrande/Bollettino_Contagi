@@ -13,7 +13,7 @@
     <string name="Title_deaths_diff">Decessi:</string>
     <string name="Title_recovered_diff">Guariti:</string>
     <string name="Title_active">Positivi:</string>
-    <string name="Title_active_diff">Incremento:</string>
+    <string name="Title_active_diff">Differenza:</string>
     <string name="Title_fatality">Tasso di fatalità:</string>
     <string name="fatality_explanation">IFR = Decessi / Casi</string>
 
@@ -35,4 +35,7 @@
 
     <string name="General">General</string>
     <string name="World">Mondo</string>
+
+    <string name="Splash_Title">Covid Stats</string>
+    <string name="Splash_Subtitle">Consulta le statistiche di ogni Nazione</string>
 </resources>
