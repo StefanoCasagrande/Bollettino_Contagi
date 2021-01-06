@@ -60,10 +60,15 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name).size()>0)
+        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "BOOKMARK").size()>0)
             menu.findItem(R.id.remove_bookmark).setVisible(true);
         else
             menu.findItem(R.id.save_bookmark).setVisible(true);
+
+        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "HOME").size()>0)
+            menu.findItem(R.id.remove_home).setVisible(true);
+        else
+            menu.findItem(R.id.save_home).setVisible(true);
     }
 
     @Override
@@ -71,7 +76,7 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         switch (item.getItemId()) {
             case R.id.save_bookmark:
 
-                if (Common.Database.Bookmark_Save(iso, province, name))
+                if (Common.Database.Bookmark_Save(iso, province, name, "BOOKMARK"))
                     Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();
@@ -80,7 +85,25 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
 
             case R.id.remove_bookmark:
 
-                if (Common.Database.Bookmark_Remove(iso, province, name))
+                if (Common.Database.Bookmark_Remove(iso, province, name, "BOOKMARK"))
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();
+
+                return true;
+
+            case R.id.save_home:
+
+                if (Common.Database.Bookmark_Save(iso, province, name, "HOME"))
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();
+
+                return true;
+
+            case R.id.remove_home:
+
+                if (Common.Database.Bookmark_Remove(iso, province, name, "HOME"))
                     Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();

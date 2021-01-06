@@ -37,6 +37,9 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE BOOKMARKS ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150), TYPE nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
+        sql_query="CREATE TABLE CONFIGURATION ( NAME nvarchar(150), VALUE nvarchar(150))";
+        sqLiteDatabase.execSQL(sql_query);
+
     }
 
     @Override
@@ -105,15 +108,20 @@ public class DB extends SQLiteOpenHelper {
 
     //region Nations
 
-    public List<Data_Regions> get_Nations()
+    public List<Data_Regions> get_Nations(Context ctx)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Regions> lista = new ArrayList<>();
 
-        String sql_query="SELECT ISO, NAME from NATIONS ";
+        String sql_query="select ISO, NAME from ( ";
 
-        sql_query += " order by NAME";
+        if (Bookmark_Select(ctx, null, null, null, "HOME").size()>0)
+            sql_query+=String.format(" SELECT '---' as ISO, %s as NAME UNION ", Validate_String(ctx.getString(R.string.World)));
 
+        sql_query+="SELECT ISO, NAME from NATIONS ) a ";
+
+        sql_query += String.format(" order by CASE WHEN NAME=%s then 0 else 1 END, NAME", Validate_String(ctx.getString(R.string.World)));
+
+        SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
             do {
@@ -204,12 +212,12 @@ public class DB extends SQLiteOpenHelper {
 
     //region Bookmarks
 
-    public List<Data_Provinces> Bookmark_Select(Context ctx, String iso, String province, String name)
+    public List<Data_Provinces> Bookmark_Select(Context ctx, String iso, String province, String name, String type)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Data_Provinces> lista = new ArrayList<>();
 
-        String sql_query="SELECT ISO, PROVINCE, NAME from BOOKMARKS where TYPE='BOOKMARK'";
+        String sql_query=String.format("SELECT ISO, PROVINCE, NAME from BOOKMARKS where TYPE=%s", Validate_String(type));
 
         if (iso!=null)
         {
@@ -238,14 +246,17 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
-    public boolean Bookmark_Remove(String iso, String province, String name)
+    public boolean Bookmark_Remove(String iso, String province, String name, String type)
     {
-        return Delete("BOOKMARKS", String.format("WHERE ISO=%s and IFNULL(PROVINCE,'')=IFNULL(%s,'') and NAME=%s and TYPE='BOOKMARK'", Validate_String(iso), Validate_String(province), Validate_String(name)));
+        return Delete("BOOKMARKS", String.format("WHERE ISO=%s and IFNULL(PROVINCE,'')=IFNULL(%s,'') and NAME=%s and TYPE=%s", Validate_String(iso), Validate_String(province), Validate_String(name), Validate_String(type)));
     }
 
-    public boolean Bookmark_Save(String iso, String province, String name)
+    public boolean Bookmark_Save(String iso, String province, String name, String type)
     {
-        String sql=String.format("INSERT INTO BOOKMARKS ( ISO, PROVINCE, NAME, TYPE ) VALUES (%s, %s, %s, 'BOOKMARK')", Validate_String(iso), Validate_String(province), Validate_String(name));
+        if (type.toLowerCase().equals("home"))
+            Delete("BOOKMARKS", "WHERE TYPE='HOME'");
+
+        String sql=String.format("INSERT INTO BOOKMARKS ( ISO, PROVINCE, NAME, TYPE ) VALUES (%s, %s, %s, %s)", Validate_String(iso), Validate_String(province), Validate_String(name), Validate_String(type));
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sql);

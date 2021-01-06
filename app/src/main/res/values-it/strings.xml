@@ -51,4 +51,6 @@
     <string name="Operation_Failed">Operazione fallita - Nessuna modificata effettuata</string>
 
     <string name="Nation_Situation">Situazione dello stato</string>
+    <string name="Save_As_First">Imposta come schermata iniziale</string>
+    <string name="Remove_As_First">Rimuovi report da schermata iniziale</string>
 </resources>

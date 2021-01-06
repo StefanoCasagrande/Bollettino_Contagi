@@ -5,16 +5,23 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Date;
+import java.util.List;
 
+import it.stefanocasagrande.covid_stats.Common.Common;
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
+import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
+import it.stefanocasagrande.covid_stats.json_classes.reports.Data_Reports;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
@@ -32,9 +39,36 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
     TextView tv_active;
     TextView tv_active_diff;
     TextView tv_fatality_rate;
+    static Boolean show_world_stats=false;
 
     public MainFragment() {
         // Required empty public constructor
+    }
+
+    public static MainFragment newInstance(Boolean p_show_world_stats) {
+        MainFragment fragment = new MainFragment();
+
+        show_world_stats = p_show_world_stats;
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        menu.findItem(R.id.remove_bookmark).setVisible(false);
+        menu.findItem(R.id.save_bookmark).setVisible(false);
+        menu.findItem(R.id.save_home).setVisible(false);
+        menu.findItem(R.id.remove_home).setVisible(false);
     }
 
     @Override
@@ -64,7 +98,24 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         Button btn_refresh = v.findViewById(R.id.btn_refresh);
         btn_refresh.setOnClickListener(this);
 
-        ((MainActivity) getActivity()).getTotalReport(this, null);
+        List<Data_Provinces> lista = Common.Database.Bookmark_Select(getActivity(),null, null, null, "HOME");
+
+        if (lista.size()>0 && !show_world_stats)
+        {
+            String province;
+
+            if (lista.get(0).province.equals(getString(R.string.General)))
+                province=null;
+            else
+                province=lista.get(0).province;
+
+            ((MainActivity) getActivity()).goToProvinceReport(lista.get(0).iso, province, lista.get(0).name);
+        }
+        else
+        {
+            show_world_stats=false;
+            ((MainActivity) getActivity()).getTotalReport(this, null);
+        }
 
         return v;
     }

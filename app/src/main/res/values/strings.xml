@@ -22,6 +22,7 @@
 
     <string name="ListProvincesFragment" translatable="false">ListProvincesFragment</string>
     <string name="ProvinceReportFragment" translatable="false">ProvinceReportFragment</string>
+    <string name="MainFragment" translatable="false">MainFragment</string>
 
     <string name="Placeholder_new" translatable="false">[Loading..]</string>
     <string name="Placeholder_total" translatable="false">[Loading..]</string>
@@ -72,4 +73,6 @@
     <string name="Operation_Failed">Operation failed - please restart the app and re-try</string>
 
     <string name="Nation_Situation">Situation in the country</string>
+    <string name="Save_As_First">Show this report at the start</string>
+    <string name="Remove_As_First">Remove this report from start</string>
 </resources>

@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (getString(R.string.Key)==null || getString(R.string.Key).equals(""))
             Toast.makeText(this, getString(R.string.key_missing), Toast.LENGTH_LONG).show();
-        else if (Common.Database.get_Nations().size()==0)
+        else if (Common.Database.get_Nations(this).size()==0)
         {
             if (GlobalVariables.isNetworkConnected)
                 getNations();
@@ -145,6 +145,13 @@ public class MainActivity extends AppCompatActivity {
             else
                 Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void goToWorldStats()
+    {
+        Fragment fragment = MainFragment.newInstance(true);
+        String tag=getString(R.string.MainFragment);
+        Show_Fragment(fragment, tag);
     }
 
     public void goToProvinceReport(String iso, String province, String name)

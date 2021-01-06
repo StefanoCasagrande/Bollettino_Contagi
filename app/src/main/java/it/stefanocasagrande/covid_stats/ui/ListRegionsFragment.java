@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -42,6 +44,22 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        menu.findItem(R.id.remove_bookmark).setVisible(false);
+        menu.findItem(R.id.save_bookmark).setVisible(false);
+        menu.findItem(R.id.save_home).setVisible(false);
+        menu.findItem(R.id.remove_home).setVisible(false);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -68,7 +86,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
             }
         });
 
-        full_list = Common.Database.get_Nations();
+        full_list = Common.Database.get_Nations(getActivity());
         Load_Data("");
 
         return v;
@@ -98,7 +116,10 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
             Data_Regions nation_selected = adapter.getItemList(position);
 
-            ((MainActivity) getActivity()).List_Provinces(nation_selected.iso);
+            if (nation_selected.name.equals(getString(R.string.World)))
+                ((MainActivity) getActivity()).goToWorldStats();
+            else
+                ((MainActivity) getActivity()).List_Provinces(nation_selected.iso);
 
         });
     }

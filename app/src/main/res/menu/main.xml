@@ -20,4 +20,18 @@
         android:title="@string/Remove_Bookmark"
         android:visible="false"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/save_home"
+        android:orderInCategory="100"
+        android:title="@string/Save_As_First"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/remove_home"
+        android:orderInCategory="100"
+        android:title="@string/Remove_As_First"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>

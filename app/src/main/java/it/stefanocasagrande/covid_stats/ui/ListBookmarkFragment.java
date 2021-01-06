@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,21 @@ public class ListBookmarkFragment extends Fragment {
 
     public ListBookmarkFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        menu.findItem(R.id.remove_bookmark).setVisible(false);
+        menu.findItem(R.id.save_bookmark).setVisible(false);
+        menu.findItem(R.id.save_home).setVisible(false);
+        menu.findItem(R.id.remove_home).setVisible(false);
     }
 
 
@@ -67,7 +84,7 @@ public class ListBookmarkFragment extends Fragment {
             }
         });
 
-        full_list = Common.Database.Bookmark_Select(getActivity(), null, null, null);
+        full_list = Common.Database.Bookmark_Select(getActivity(), null, null, null, "BOOKMARK");
 
         Load_Data("");
 
