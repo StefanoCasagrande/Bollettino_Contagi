@@ -60,15 +60,23 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "BOOKMARK").size()>0)
+        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "BOOKMARK").size()>0) {
             menu.findItem(R.id.remove_bookmark).setVisible(true);
-        else
+            menu.findItem(R.id.save_bookmark).setVisible(false);
+        }
+        else {
+            menu.findItem(R.id.remove_bookmark).setVisible(false);
             menu.findItem(R.id.save_bookmark).setVisible(true);
+        }
 
-        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "HOME").size()>0)
+        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name, "HOME").size()>0) {
             menu.findItem(R.id.remove_home).setVisible(true);
-        else
+            menu.findItem(R.id.save_home).setVisible(false);
+        }
+        else {
+            menu.findItem(R.id.remove_home).setVisible(false);
             menu.findItem(R.id.save_home).setVisible(true);
+        }
     }
 
     @Override
@@ -157,7 +165,19 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         Button btn_refresh = v.findViewById(R.id.btn_refresh);
         btn_refresh.setOnClickListener(this);
 
+        if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
+            Show_Instruction();
+
         return v;
+    }
+
+    public void Show_Instruction()
+    {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(getString(R.string.Instruction_Title))
+                .setMessage(getString(R.string.Instruction_Text))
+                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1"))
+                .show();
     }
 
     @Override

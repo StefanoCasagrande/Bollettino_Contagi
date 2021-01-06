@@ -53,4 +53,8 @@
     <string name="Nation_Situation">Situazione dello stato</string>
     <string name="Save_As_First">Imposta come schermata iniziale</string>
     <string name="Remove_As_First">Rimuovi report da schermata iniziale</string>
+
+    <string name="Dont_Show_Anymore">Non mostrare più l\'avviso</string>
+    <string name="Instruction_Title">Istruzioni</string>
+    <string name="Instruction_Text">Tramite il menù ( in alto a destra ) puoi salvare questo report nei preferiti o impostarlo come pagina iniziale.\n\nCon lo stesso menù puoi rimuovere il report da entrambi.</string>
 </resources>

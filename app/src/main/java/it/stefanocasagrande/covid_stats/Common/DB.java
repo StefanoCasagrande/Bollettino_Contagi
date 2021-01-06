@@ -263,4 +263,47 @@ public class DB extends SQLiteOpenHelper {
         return true;
     }
 
+    //endregion
+
+    //region Configuration
+
+    public boolean Set_Configurazione(String name, String value)
+    {
+        if (Delete("CONFIGURATION", "where NAME=" + Validate_String(name))) {
+
+            String sql = String.format("INSERT INTO CONFIGURATION ( NAME, VALUE ) VALUES (%s, %s)  ", Validate_String(name), Validate_String(value));
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(sql);
+
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public String Get_Configurazione(String name)
+    {
+        String value="";
+
+        String sql_query="SELECT VALUE from CONFIGURATION where NAME=" + Validate_String(name);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                value = c.getString(0);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return value;
+    }
+
+    //endregion
+
+
+
 }

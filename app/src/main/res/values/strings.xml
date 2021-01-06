@@ -75,4 +75,8 @@
     <string name="Nation_Situation">Situation in the country</string>
     <string name="Save_As_First">Show this report at the start</string>
     <string name="Remove_As_First">Remove this report from start</string>
+
+    <string name="Dont_Show_Anymore">Don\'t show it anymore</string>
+    <string name="Instruction_Title">Instruction</string>
+    <string name="Instruction_Text">Thanks to the menu ( up right ) you can save this report in the bookmark or set it as your star page.\n\nWith the same menu you can remove from both.</string>
 </resources>
