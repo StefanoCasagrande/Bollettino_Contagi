@@ -38,4 +38,8 @@
 
     <string name="Splash_Title">Covid Stats</string>
     <string name="Splash_Subtitle">Consulta le statistiche di ogni Nazione</string>
+
+    <string name="Menu_Title">Ricorda sempre:</string>
+    <string name="Wear_The_Mask">Indossa la mascherina</string>
+    <string name="Wash_Your_Hand">Lava le mani</string>
 </resources>

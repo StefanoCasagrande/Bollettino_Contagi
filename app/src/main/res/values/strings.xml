@@ -57,4 +57,8 @@
     <string name="API_Error" translatable="false">API Error - %1$s</string>
     <string name="Splash_Title">Covid Stats</string>
     <string name="Splash_Subtitle">Search for any nation statistics</string>
+
+    <string name="Menu_Title">Don\'t forget:</string>
+    <string name="Wear_The_Mask">Wear the mask</string>
+    <string name="Wash_Your_Hand">Wash your hands</string>
 </resources>
