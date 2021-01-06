@@ -19,6 +19,7 @@ import java.util.Date;
 
 import it.stefanocasagrande.covid_stats.Common.Common;
 import it.stefanocasagrande.covid_stats.Covid_Interface;
+import it.stefanocasagrande.covid_stats.GlobalVariables;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Data_Reports;
@@ -160,7 +161,10 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         tv_active_diff = v.findViewById(R.id.tv_active_diff);
         tv_fatality_rate = v.findViewById(R.id.tv_fatality_rate);
 
-        ((MainActivity) getActivity()).getReportByProvince(iso, selected_date, province, this);
+        if (GlobalVariables.isNetworkConnected)
+            ((MainActivity) getActivity()).getReportByProvince(iso, selected_date, province, this);
+        else
+            Toast.makeText(getActivity(),getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
 
         Button btn_refresh = v.findViewById(R.id.btn_refresh);
         btn_refresh.setOnClickListener(this);

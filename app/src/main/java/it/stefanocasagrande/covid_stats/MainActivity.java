@@ -364,7 +364,9 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                 Date date = format.parse(et_data.getText().toString());
 
-                if (date.after(new Date()))
+                if (!GlobalVariables.isNetworkConnected)
+                    Toast.makeText(this, getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+                else if (date.after(new Date()))
                     Toast.makeText(this, getString(R.string.Future_Date), Toast.LENGTH_LONG).show();
                 else if (var.getTag()!=null && var.getTag().equals(getString(R.string.ProvinceReportFragment)))
                     getReportByProvince(iso, date, province, (ProvinceReportFragment) var);
