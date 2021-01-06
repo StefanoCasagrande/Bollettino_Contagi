@@ -16,7 +16,7 @@
         android:label="@string/menu_search" />
 
     <fragment
-        android:id="@+id/nav_gps"
-        android:name="it.stefanocasagrande.covid_stats.ui.GpsFragment"
-        android:label="@string/menu_gps" />
+        android:id="@+id/nav_bookmark"
+        android:name="it.stefanocasagrande.covid_stats.ui.ListBookmarkFragment"
+        android:label="@string/menu_bookmark" />
 </navigation>

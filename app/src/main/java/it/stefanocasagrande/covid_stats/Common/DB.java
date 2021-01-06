@@ -34,6 +34,9 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE PROVINCES ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
+        sql_query="CREATE TABLE BOOKMARKS ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150), TYPE nvarchar(150))";
+        sqLiteDatabase.execSQL(sql_query);
+
     }
 
     @Override
@@ -198,4 +201,55 @@ public class DB extends SQLiteOpenHelper {
     }
 
     //endregion
+
+    //region Bookmarks
+
+    public List<Data_Provinces> Bookmark_Select(Context ctx, String iso, String province, String name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Data_Provinces> lista = new ArrayList<>();
+
+        String sql_query="SELECT ISO, PROVINCE, NAME from BOOKMARKS where TYPE='BOOKMARK'";
+
+        if (iso!=null)
+        {
+            sql_query += String.format(" AND ISO=%s and IFNULL(PROVINCE,'')=IFNULL(%s,'') and NAME=%s", Validate_String(iso), Validate_String(province), Validate_String(name));
+        }
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                Data_Provinces var = new Data_Provinces();
+
+                var.iso = c.getString(0);
+                var.province = c.getString(1);
+                var.name = c.getString(2);
+
+                if (var.province==null || var.province.equals(""))
+                    var.province = ctx.getString(R.string.General);
+
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    public boolean Bookmark_Remove(String iso, String province, String name)
+    {
+        return Delete("BOOKMARKS", String.format("WHERE ISO=%s and IFNULL(PROVINCE,'')=IFNULL(%s,'') and NAME=%s and TYPE='BOOKMARK'", Validate_String(iso), Validate_String(province), Validate_String(name)));
+    }
+
+    public boolean Bookmark_Save(String iso, String province, String name)
+    {
+        String sql=String.format("INSERT INTO BOOKMARKS ( ISO, PROVINCE, NAME, TYPE ) VALUES (%s, %s, %s, 'BOOKMARK')", Validate_String(iso), Validate_String(province), Validate_String(name));
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+        return true;
+    }
+
 }

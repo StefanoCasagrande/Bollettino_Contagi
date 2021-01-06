@@ -60,8 +60,15 @@ public class Provinces_Adapter extends ArrayAdapter<Data_Provinces> {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
 
-        mViewHolder.mainText.setText(list.get(position).province);
-        mViewHolder.secondText.setText(list.get(position).name);
+        if (list.get(position).province.equals(context.getString(R.string.General)))
+        {
+            mViewHolder.mainText.setText(list.get(position).name);
+            mViewHolder.secondText.setText(context.getString(R.string.Nation_Situation));
+        }
+        else {
+            mViewHolder.mainText.setText(list.get(position).province);
+            mViewHolder.secondText.setText(list.get(position).name);
+        }
 
         return convertView;
     }

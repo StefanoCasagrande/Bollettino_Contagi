@@ -9,7 +9,7 @@
 
     <string name="menu_home">World Situation</string>
     <string name="menu_search">Search..</string>
-    <string name="menu_gps">Use GPS</string>
+    <string name="menu_bookmark">Bookmarks</string>
 
     <string name="look_for_hint">Looking for..</string>
 
@@ -61,4 +61,15 @@
     <string name="Menu_Title">Don\'t forget:</string>
     <string name="Wear_The_Mask">Wear the mask</string>
     <string name="Wash_Your_Hand">Wash your hands</string>
+
+    <string name="Save_Bookmark">Save in bookmarks..</string>
+    <string name="Remove_Bookmark">Remove from bookmarks..</string>
+
+    <string name="Ok" translatable="false">Ok</string>
+    <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
+
+    <string name="Operation_Success">Success - operation succeeded</string>
+    <string name="Operation_Failed">Operation failed - please restart the app and re-try</string>
+
+    <string name="Nation_Situation">Situation in the country</string>
 </resources>

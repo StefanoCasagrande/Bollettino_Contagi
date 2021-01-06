@@ -1,7 +1,11 @@
 package it.stefanocasagrande.covid_stats.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import it.stefanocasagrande.covid_stats.Common.Common;
 import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
@@ -39,17 +44,61 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
     static String iso;
     static Date selected_date;
     static String province;
+    static String name;
 
     public ProvinceReportFragment() {
         // Required empty public constructor
     }
 
-    public static ProvinceReportFragment newInstance(String p_iso, Date p_date, String p_province) {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        if (Common.Database.Bookmark_Select(getActivity(), iso, province, name).size()>0)
+            menu.findItem(R.id.remove_bookmark).setVisible(true);
+        else
+            menu.findItem(R.id.save_bookmark).setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_bookmark:
+
+                if (Common.Database.Bookmark_Save(iso, province, name))
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();
+
+                return true;
+
+            case R.id.remove_bookmark:
+
+                if (Common.Database.Bookmark_Remove(iso, province, name))
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Success), Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getActivity(), getString(R.string.Operation_Failed), Toast.LENGTH_LONG).show();
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public static ProvinceReportFragment newInstance(String p_iso, Date p_date, String p_province, String p_name) {
         ProvinceReportFragment fragment = new ProvinceReportFragment();
 
         iso = p_iso;
         selected_date = p_date;
         province = p_province;
+        name = p_name;
 
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -59,6 +108,7 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,31 +22,22 @@ import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 
-public class ListprovincesFragment extends Fragment {
+public class ListBookmarkFragment extends Fragment {
 
     ListView list;
     EditText textFilter;
     private Provinces_Adapter adapter;
     private List<Data_Provinces> full_list;
-    private static String iso_code;
 
-    public ListprovincesFragment() {
+    public ListBookmarkFragment() {
         // Required empty public constructor
     }
 
-    public static ListprovincesFragment newInstance(String p_iso_code) {
-        ListprovincesFragment fragment = new ListprovincesFragment();
-
-        iso_code = p_iso_code;
-
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -76,19 +67,9 @@ public class ListprovincesFragment extends Fragment {
             }
         });
 
-        full_list = Common.Database.get_Provinces(iso_code, getActivity());
+        full_list = Common.Database.Bookmark_Select(getActivity(), null, null, null);
 
-        if (full_list.size()==1)
-        {
-            String province = full_list.get(0).province;
-
-            if (province.equals(getString(R.string.General)))
-                province=null;
-
-            ((MainActivity) getActivity()).goToProvinceReport(full_list.get(0).iso, province, full_list.get(0).name);
-        }
-        else
-            Load_Data("");
+        Load_Data("");
 
         return v;
     }

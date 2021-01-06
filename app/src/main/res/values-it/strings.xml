@@ -2,7 +2,7 @@
 
     <string name="menu_home">Situazione generale</string>
     <string name="menu_search">Ricerca..</string>
-    <string name="menu_gps">Utilizza GPS</string>
+    <string name="menu_bookmark">Preferiti</string>
 
     <string name="look_for_hint">Cerca..</string>
 
@@ -42,4 +42,13 @@
     <string name="Menu_Title">Ricorda sempre:</string>
     <string name="Wear_The_Mask">Indossa la mascherina</string>
     <string name="Wash_Your_Hand">Lava le mani</string>
+
+    <string name="Save_Bookmark">Salva nei preferiti..</string>
+    <string name="Remove_Bookmark">Rimuovi dai preferiti..</string>
+    <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
+
+    <string name="Operation_Success">Operazione portata a termine con successo</string>
+    <string name="Operation_Failed">Operazione fallita - Nessuna modificata effettuata</string>
+
+    <string name="Nation_Situation">Situazione dello stato</string>
 </resources>

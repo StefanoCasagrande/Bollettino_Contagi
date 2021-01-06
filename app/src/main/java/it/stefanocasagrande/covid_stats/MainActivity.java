@@ -3,6 +3,7 @@ package it.stefanocasagrande.covid_stats;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_search, R.id.nav_gps)
+                R.id.nav_home, R.id.nav_search, R.id.nav_bookmark)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -110,6 +111,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_info:
+
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.action_info))
+                        .setMessage(String.format(getString(R.string.Info_About), "Johns Hopkins CSSE", "Axisbits", "RapiAPI.com", "stefano.casagrande@gmail.com"))
+                        .setPositiveButton(getString(R.string.Ok), (dialog2, which) -> { }
+                        )
+                        .show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -128,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void goToProvinceReport(String iso, String province)
+    public void goToProvinceReport(String iso, String province, String name)
     {
-        Fragment fragment = ProvinceReportFragment.newInstance(iso, null, province);
+        Fragment fragment = ProvinceReportFragment.newInstance(iso, null, province, name);
         String tag=getString(R.string.ProvinceReportFragment);
         Show_Fragment(fragment, tag);
     }
