@@ -40,7 +40,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
 
     @Override
