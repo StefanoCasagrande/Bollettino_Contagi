@@ -10,11 +10,14 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
+
+import static it.stefanocasagrande.covid_stats.Common.Common.Date_ToJsonFormat;
 
 public class DB extends SQLiteOpenHelper {
 
@@ -28,16 +31,19 @@ public class DB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String sql_query="CREATE TABLE NATIONS ( ISO nvarchar(3), NAME nvarchar(150))";
+        String sql_query="CREATE TABLE NATIONS (id INTEGER PRIMARY KEY, ISO nvarchar(3), NAME nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE PROVINCES ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150))";
+        sql_query="CREATE TABLE PROVINCES (id INTEGER PRIMARY KEY, ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE BOOKMARKS ( ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150), TYPE nvarchar(150))";
+        sql_query="CREATE TABLE BOOKMARKS (id INTEGER PRIMARY KEY, ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150), TYPE nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE CONFIGURATION ( NAME nvarchar(150), VALUE nvarchar(150))";
+        sql_query="CREATE TABLE CONFIGURATION (id INTEGER PRIMARY KEY, NAME nvarchar(150), VALUE nvarchar(150))";
+        sqLiteDatabase.execSQL(sql_query);
+
+        sql_query="CREATE TABLE HISTORY (ISO nvarchar(3), PROVINCE nvarchar(150), NAME nvarchar(150), LAST_REQUEST nvarchar(14), PRIMARY KEY(ISO, PROVINCE, NAME))";
         sqLiteDatabase.execSQL(sql_query);
 
     }
@@ -304,6 +310,56 @@ public class DB extends SQLiteOpenHelper {
 
     //endregion
 
+    //region History
 
+    public boolean Insert_History(String iso, String province, String name, Context ctx)
+    {
+        // In History we can have no more than 10 items.
+        // So if the items already exists we just update the last request field.
+        // if it doesn't exist we have to add it and remove the one
+        // wich is far away.
+
+        String date_time_string = Date_ToJsonFormat(new Date());
+
+        if (province==null)
+            province=ctx.getString(R.string.General);
+
+        String sql=String.format("INSERT OR REPLACE INTO HISTORY ( ISO, PROVINCE, NAME, LAST_REQUEST ) VALUES (%s, %s, %s, %s)", Validate_String(iso), Validate_String(province) , Validate_String(name), Validate_String(date_time_string));
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+
+        sql="DELETE FROM HISTORY WHERE LAST_REQUEST NOT IN ( SELECT LAST_REQUEST FROM HISTORY ORDER BY LAST_REQUEST DESC LIMIT 10 ) ";
+        db.execSQL(sql);
+
+        return true;
+    }
+
+    public List<Data_Provinces> get_History()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Data_Provinces> lista = new ArrayList<>();
+
+        String sql_query="SELECT ISO, PROVINCE, NAME from HISTORY order by LAST_REQUEST desc ";
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                Data_Provinces var = new Data_Provinces();
+
+                var.iso = c.getString(0);
+                var.province = c.getString(1);
+                var.name = c.getString(2);
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    //endregion
 
 }

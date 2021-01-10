@@ -10,6 +10,7 @@
     <string name="menu_home">World Situation</string>
     <string name="menu_search">Search..</string>
     <string name="menu_bookmark">Bookmarks</string>
+    <string name="menu_history">History</string>
 
     <string name="look_for_hint">Looking for..</string>
 

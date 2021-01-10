@@ -19,4 +19,9 @@
         android:id="@+id/nav_bookmark"
         android:name="it.stefanocasagrande.covid_stats.ui.ListBookmarkFragment"
         android:label="@string/menu_bookmark" />
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="it.stefanocasagrande.covid_stats.ui.ListHistoryFragment"
+        android:label="@string/menu_history" />
 </navigation>

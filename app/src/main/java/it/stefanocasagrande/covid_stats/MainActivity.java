@@ -156,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToProvinceReport(String iso, String province, String name)
     {
+        Common.Database.Insert_History(iso, province, name, this);
+
         Fragment fragment = ProvinceReportFragment.newInstance(iso, null, province, name);
         String tag=getString(R.string.ProvinceReportFragment);
         Show_Fragment(fragment, tag);

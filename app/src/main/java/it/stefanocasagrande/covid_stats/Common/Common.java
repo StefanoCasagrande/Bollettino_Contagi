@@ -1,5 +1,9 @@
 package it.stefanocasagrande.covid_stats.Common;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class Common {
 
     public static DB Database;
@@ -21,5 +25,13 @@ public class Common {
             return String.format("-%s",dotfiedNum.toString());
         else
             return dotfiedNum.toString();
+    }
+
+    public static String Date_ToJsonFormat(Date data_da_Convertire)
+    {
+        SimpleDateFormat sdf;
+        sdf = new SimpleDateFormat("yyyyMMddHH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdf.format(data_da_Convertire);
     }
 }

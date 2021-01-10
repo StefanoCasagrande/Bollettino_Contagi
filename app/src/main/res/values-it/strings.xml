@@ -3,6 +3,7 @@
     <string name="menu_home">Situazione generale</string>
     <string name="menu_search">Ricerca..</string>
     <string name="menu_bookmark">Preferiti</string>
+    <string name="menu_history">Ultime ricerche..</string>
 
     <string name="look_for_hint">Cerca..</string>
 
