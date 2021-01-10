@@ -190,7 +190,11 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         if (wResponse.getDatas().size()==0)
         {
             Toast.makeText(getActivity(),getString(R.string.No_Report_Available), Toast.LENGTH_LONG).show();
-            ((MainActivity) getActivity()).goToListprovincesFragment(iso);
+
+            if (province!=null)
+                ((MainActivity) getActivity()).goToListprovincesFragment(iso);
+            else
+                ((MainActivity) getActivity()).goToWorldStats();
         }
         else if (wResponse.getDatas().size()==1)
         {
