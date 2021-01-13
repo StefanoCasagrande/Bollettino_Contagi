@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/Text_Small"
         android:paddingBottom="10dp"
         android:text="@string/Menu_Title"
         />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/Icons"
             android:textStyle="bold"
             android:text=""
             android:fontFamily="@font/free_solid_900"
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/Text_Small"
             android:text="@string/Wear_The_Mask"
             />
 
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/Icons"
             android:textStyle="bold"
             android:text=""
             android:fontFamily="@font/free_solid_900"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/Text_Small"
             android:text="@string/Wash_Your_Hand"
             />
 
