@@ -74,6 +74,7 @@ public class ListprovincesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_cerca, container, false);
 
         list = v.findViewById(R.id.listView);
+        list.setEmptyView(v.findViewById(R.id.empty));
         textFilter = v.findViewById(R.id.cercaEditText);
 
         textFilter.addTextChangedListener(new TextWatcher() {
@@ -123,7 +124,7 @@ public class ListprovincesFragment extends Fragment {
             {
                 if (filter!=null && !filter.equals(""))
                 {
-                    if (var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
+                    if (var.province.toLowerCase().contains(filter.toLowerCase()) || var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
                         list_to_load.add(var);
                 }
             }

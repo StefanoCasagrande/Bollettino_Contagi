@@ -80,4 +80,6 @@
     <string name="Dont_Show_Anymore">Don\'t show it anymore</string>
     <string name="Instruction_Title">Instruction</string>
     <string name="Instruction_Text">Thanks to the menu ( up right ) you can save this report in the bookmark or set it as your star page.\n\nWith the same menu you can remove from both.</string>
+
+    <string name="empty_text">No items to show..</string>
 </resources>

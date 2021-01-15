@@ -66,6 +66,7 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
         View v = inflater.inflate(R.layout.fragment_cerca, container, false);
 
         list = v.findViewById(R.id.listView);
+        list.setEmptyView(v.findViewById(R.id.empty));
         textFilter = v.findViewById(R.id.cercaEditText);
 
         textFilter.addTextChangedListener(new TextWatcher() {

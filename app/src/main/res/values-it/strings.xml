@@ -58,4 +58,6 @@
     <string name="Dont_Show_Anymore">Non mostrare più l\'avviso</string>
     <string name="Instruction_Title">Istruzioni</string>
     <string name="Instruction_Text">Tramite il menù ( in alto a destra ) puoi salvare questo report nei preferiti o impostarlo come pagina iniziale.\n\nCon lo stesso menù puoi rimuovere il report da entrambi.</string>
+
+    <string name="empty_text">Nessun elemento da mostrare</string>
 </resources>
