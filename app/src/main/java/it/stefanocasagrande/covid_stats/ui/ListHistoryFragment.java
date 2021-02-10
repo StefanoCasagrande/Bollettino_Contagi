@@ -22,6 +22,8 @@ import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
+
 public class ListHistoryFragment extends Fragment {
 
     ListView list;
@@ -85,6 +87,9 @@ public class ListHistoryFragment extends Fragment {
         full_list = Common.Database.get_History();
 
         Load_Data("");
+
+        list.requestFocus();
+        hideKeyboard(getActivity());
 
         return v;
     }

@@ -26,6 +26,8 @@ import it.stefanocasagrande.covid_stats.json_classes.regions.Data_Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
+
 public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
     ListView list;
@@ -89,6 +91,9 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
 
         full_list = Common.Database.get_Nations(getActivity());
         Load_Data("");
+
+        list.requestFocus();
+        hideKeyboard(getActivity());
 
         return v;
     }

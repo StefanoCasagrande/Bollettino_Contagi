@@ -23,6 +23,8 @@ import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
+
 public class ListprovincesFragment extends Fragment {
 
     ListView list;
@@ -108,6 +110,9 @@ public class ListprovincesFragment extends Fragment {
         }
         else
             Load_Data("");
+
+        list.requestFocus();
+        hideKeyboard(getActivity());
 
         return v;
     }

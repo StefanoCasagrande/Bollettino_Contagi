@@ -23,6 +23,8 @@ import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
 
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
+
 public class ListBookmarkFragment extends Fragment {
 
     ListView list;
@@ -87,6 +89,9 @@ public class ListBookmarkFragment extends Fragment {
         full_list = Common.Database.Bookmark_Select(getActivity(), null, null, null, "BOOKMARK");
 
         Load_Data("");
+
+        list.requestFocus();
+        hideKeyboard(getActivity());
 
         return v;
     }
