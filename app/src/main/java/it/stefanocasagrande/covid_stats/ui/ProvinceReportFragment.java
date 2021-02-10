@@ -27,6 +27,7 @@ import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 import static it.stefanocasagrande.covid_stats.Common.Common.AddDotToInteger;
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
 
 public class ProvinceReportFragment extends Fragment implements Covid_Interface, View.OnClickListener{
 
@@ -172,6 +173,8 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
             Show_Instruction();
 
+        hideKeyboard(getActivity());
+
         return v;
     }
 
@@ -206,8 +209,16 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
             tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getdeaths())));
             tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(wResponse.getDatas().get(0).getdeaths_diff())));
 
-            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getrecovered())));
-            tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff())));
+            if (wResponse.getDatas().get(0).getrecovered()!=0)
+            {
+                tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getDatas().get(0).getrecovered())));
+                tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getDatas().get(0).getrecovered_diff())));
+            }
+            else
+            {
+                tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), getString(R.string.Not_Available)));
+                tv_recovered_diff.setText(String.format("%s %s", getString(R.string.Title_recovered_diff), getString(R.string.Not_Available)));
+            }
 
             tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getDatas().get(0).getactive())));
 
@@ -268,8 +279,15 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
             tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(deaths)));
             tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(deaths_diff)));
 
-            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(recovered)));
-            tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(recovered_diff)));
+            if (recovered!=0) {
+                tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(recovered)));
+                tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(recovered_diff)));
+            }
+            else
+            {
+                tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), getString(R.string.Not_Available)));
+                tv_recovered_diff.setText(String.format("%s %s", getString(R.string.Title_recovered_diff), getString(R.string.Not_Available)));
+            }
 
             tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(active)));
 

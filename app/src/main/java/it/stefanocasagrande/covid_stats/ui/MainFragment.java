@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
 import it.stefanocasagrande.covid_stats.Common.Common;
@@ -21,11 +20,11 @@ import it.stefanocasagrande.covid_stats.Covid_Interface;
 import it.stefanocasagrande.covid_stats.MainActivity;
 import it.stefanocasagrande.covid_stats.R;
 import it.stefanocasagrande.covid_stats.json_classes.provinces.Data_Provinces;
-import it.stefanocasagrande.covid_stats.json_classes.reports.Data_Reports;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
 
 import static it.stefanocasagrande.covid_stats.Common.Common.AddDotToInteger;
+import static it.stefanocasagrande.covid_stats.Common.Common.hideKeyboard;
 
 public class MainFragment extends Fragment implements Covid_Interface, View.OnClickListener {
 
@@ -118,6 +117,8 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
             ((MainActivity) getActivity()).getTotalReport(this, null);
         }
 
+        hideKeyboard(getActivity());
+
         return v;
     }
 
@@ -132,8 +133,16 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         tv_deaths.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getdeaths())));
         tv_deaths_diff.setText(String.format("%s +%s", getString(R.string.Title_deaths_diff), AddDotToInteger(wResponse.getData().getdeaths_diff())));
 
-        tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getrecovered())));
-        tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getData().getrecovered_diff())));
+        if (wResponse.getData().getrecovered()!=0)
+        {
+            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), AddDotToInteger(wResponse.getData().getrecovered())));
+            tv_recovered_diff.setText(String.format("%s +%s", getString(R.string.Title_recovered_diff), AddDotToInteger(wResponse.getData().getrecovered_diff())));
+        }
+        else
+        {
+            tv_recovered.setText(String.format("%s %s", getString(R.string.Title_Total), getString(R.string.Not_Available)));
+            tv_recovered_diff.setText(String.format("%s %s", getString(R.string.Title_recovered_diff), getString(R.string.Not_Available)));
+        }
 
         tv_active.setText(String.format("%s %s", getString(R.string.Title_active), AddDotToInteger(wResponse.getData().getactive())));
 

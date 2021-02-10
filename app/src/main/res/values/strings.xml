@@ -67,7 +67,7 @@
     <string name="Save_Bookmark">Save in bookmarks..</string>
     <string name="Remove_Bookmark">Remove from bookmarks..</string>
 
-    <string name="Ok" translatable="false">Ok</string>
+    <string name="Ok" translatable="false">OK</string>
     <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
 
     <string name="Operation_Success">Success - operation succeeded</string>
@@ -82,4 +82,5 @@
     <string name="Instruction_Text">Thanks to the menu ( up right ) you can save this report in the bookmark or set it as your star page.\n\nWith the same menu you can remove from both.</string>
 
     <string name="empty_text">No items to show..</string>
+    <string name="Not_Available">Not Available</string>
 </resources>

@@ -60,4 +60,5 @@
     <string name="Instruction_Text">Tramite il menù ( in alto a destra ) puoi salvare questo report nei preferiti o impostarlo come pagina iniziale.\n\nCon lo stesso menù puoi rimuovere il report da entrambi.</string>
 
     <string name="empty_text">Nessun elemento da mostrare</string>
+    <string name="Not_Available">Non disponibile</string>
 </resources>
