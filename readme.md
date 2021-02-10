@@ -7,6 +7,10 @@ Returns diff for confirmed, deaths, and recovered, compared with the previous da
 
 It's just an exercise.
 
+![Alt text](screenshot-1.jpg?raw=true "Splash Scren")
+![Alt text](screenshot-2.jpg?raw=true "World Situation")
+![Alt text](screenshot-3.jpg?raw=true "List of States")
+
 ## Getting Started
 
 ### Prerequisites
