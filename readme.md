@@ -7,9 +7,19 @@ Returns diff for confirmed, deaths, and recovered, compared with the previous da
 
 It's just an exercise.
 
-![Alt text](screenshot-1.jpg?raw=true "Splash Scren")
-![Alt text](screenshot-2.jpg?raw=true "World Situation")
-![Alt text](screenshot-3.jpg?raw=true "List of States")
+<table>
+<tr>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Covid_Stats/master/screenshot_1.jpg" width="250">
+</td>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Covid_Stats/master/screenshot_2.jpg" width="250">
+</td>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Covid_Stats/master/screenshot_3.jpg" width="250">
+</td>
+</tr>
+</table>
 
 ## Getting Started
 
