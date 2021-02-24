@@ -7,11 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import it.stefanocasagrande.covid_stats.Common.Common;
-import it.stefanocasagrande.covid_stats.Common.DB;
-import it.stefanocasagrande.covid_stats.Network.CheckNetwork;
 
 public class SplashScreen extends AppCompatActivity {
 
