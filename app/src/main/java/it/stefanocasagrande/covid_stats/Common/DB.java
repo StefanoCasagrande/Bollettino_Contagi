@@ -199,14 +199,20 @@ public class DB extends SQLiteOpenHelper {
         if (Delete("PROVINCES", " WHERE ISO= " + Validate_String(lista.get(0).iso))) {
 
             List<String> sql_insert_values = new ArrayList<>();
+            boolean record_for_the_nation=false;
 
             for (Data_Provinces var : lista)
             {
-                if (var.province==null || var.province.equals(""))
-                    var.province=ctx.getString(R.string.General);
+                if (var.province==null || var.province.equals("")) {
+                    var.province = ctx.getString(R.string.General);
+                    record_for_the_nation=true;
+                }
 
                 sql_insert_values.add(String.format("(%s, %s, %s)", Validate_String(var.iso), Validate_String(var.province), Validate_String(var.name)));
             }
+
+            if (!record_for_the_nation)
+                sql_insert_values.add(String.format("(%s, %s, %s)", Validate_String(lista.get(0).iso), Validate_String(ctx.getString(R.string.General)), Validate_String(lista.get(0).name)));
 
             return Insert_Multi("INSERT INTO PROVINCES ( ISO, PROVINCE, NAME ) VALUES ", sql_insert_values);
         }

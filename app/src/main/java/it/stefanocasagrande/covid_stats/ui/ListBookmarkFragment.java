@@ -106,7 +106,7 @@ public class ListBookmarkFragment extends Fragment {
         {
             for(Data_Provinces var : full_list)
             {
-                if (filter!=null && !filter.equals(""))
+                if (!filter.equals(""))
                 {
                     if (var.province.toLowerCase().contains(filter.toLowerCase()) || var.iso.toLowerCase().contains(filter.toLowerCase()) || var.name.toLowerCase().contains(filter.toLowerCase()))
                         list_to_load.add(var);
