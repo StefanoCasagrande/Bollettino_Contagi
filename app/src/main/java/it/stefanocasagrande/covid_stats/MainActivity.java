@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                         .show();
 
                 return true;
+            case R.id.help:
+                Show_Help();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -465,6 +467,15 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
         et_data.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    public void Show_Help()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.Instruction_Title))
+                .setMessage(getString(R.string.Help_Text))
+                .setPositiveButton(getString(R.string.Ok), null)
+                .show();
     }
 
     //endregion

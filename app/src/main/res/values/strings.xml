@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Covid_Stats</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_title" translatable="false">Android Studio</string>
-    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
-    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_info" translatable="false">Info..</string>
+    <string name="help">Help..</string>
 
     <string name="menu_home">World Situation</string>
     <string name="menu_search">Search..</string>
@@ -18,8 +14,6 @@
     <string name="key_missing">Key is missing - Please add it to the resources</string>
 
     <string name="Key" translatable="false"></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <string name="ListProvincesFragment" translatable="false">ListProvincesFragment</string>
     <string name="ProvinceReportFragment" translatable="false">ProvinceReportFragment</string>
@@ -83,6 +77,8 @@
     <string name="Dont_Show_Anymore">Don\'t show it anymore</string>
     <string name="Instruction_Title">Instruction</string>
     <string name="Instruction_Text">Thanks to the menu ( up right ) you can save this report in the bookmark or set it as your star page.\n\nWith the same menu you can remove from both.</string>
+
+    <string name="Help_Text">Use the menù on the left ( 3 horizontal stripes ) to search for your country of interest ( "Search" ).\n\nIn the Bookmarks you can save your favorite stats so you don\'t have to look for them no more.</string>
 
     <string name="empty_text">No items to show..</string>
     <string name="Not_Available">Not Available</string>

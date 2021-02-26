@@ -4,6 +4,7 @@
     <string name="menu_search">Ricerca..</string>
     <string name="menu_bookmark">Preferiti</string>
     <string name="menu_history">Ultime ricerche..</string>
+    <string name="help">Aiuto..</string>
 
     <string name="look_for_hint">Cerca..</string>
 
@@ -58,6 +59,9 @@
     <string name="Dont_Show_Anymore">Non mostrare più l\'avviso</string>
     <string name="Instruction_Title">Istruzioni</string>
     <string name="Instruction_Text">Tramite il menù ( in alto a destra ) puoi salvare questo report nei preferiti o impostarlo come pagina iniziale.\n\nCon lo stesso menù puoi rimuovere il report da entrambi.</string>
+
+    <string name="Help_Text">Usa il menù in alto a sinistra ( 3 righe orizzontali ) per navigare nell\'app.\n\nCon "Ricerca.." puoi trovare lo stato o lo provincia di tuo interesse.\n\nIn "Preferiti" puoi salvare le tue statistiche preferite così da averle sempre sotto mano.</string>
+
 
     <string name="empty_text">Nessun elemento da mostrare</string>
     <string name="Not_Available">Non disponibile</string>

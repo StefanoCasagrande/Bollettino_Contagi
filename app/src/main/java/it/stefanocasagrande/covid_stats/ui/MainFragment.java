@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -98,7 +99,12 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         tv_region.setText(getString(R.string.World));
 
         Button btn_refresh = v.findViewById(R.id.btn_refresh);
+        btn_refresh.setTag("REFRESH");
         btn_refresh.setOnClickListener(this);
+
+        LinearLayout ll_location = v.findViewById(R.id.ll_location);
+        ll_location.setTag("HELP");
+        ll_location.setOnClickListener(this);
 
         List<Data_Provinces> lista = Common.Database.Bookmark_Select(getActivity(),null, null, null, "HOME");
 
@@ -164,6 +170,17 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
 
     @Override
     public void onClick(View view) {
-        ((MainActivity) getActivity()).Update_World_Report(this);
+
+        if (view.getTag()!=null) {
+
+            switch ((String) view.getTag()) {
+                case "REFRESH":
+                    ((MainActivity) getActivity()).Update_World_Report(this);
+                    break;
+                case "HELP":
+                    ((MainActivity) getActivity()).Show_Help();
+                    break;
+            }
+        }
     }
 }

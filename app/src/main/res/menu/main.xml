@@ -34,4 +34,10 @@
         android:title="@string/Remove_As_First"
         android:visible="false"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="100"
+        android:title="@string/help"
+        app:showAsAction="never" />
 </menu>
