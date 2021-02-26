@@ -36,6 +36,14 @@ public class ListBookmarkFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ListBookmarkFragment newInstance() {
+        ListBookmarkFragment fragment = new ListBookmarkFragment();
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -63,6 +71,8 @@ public class ListBookmarkFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cerca, container, false);
+
+        Common.Back_Action = Common.Back_To_Main;
 
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
@@ -122,6 +132,8 @@ public class ListBookmarkFragment extends Fragment {
 
             if (province.equals(getString(R.string.General)))
                 province=null;
+
+            Common.Back_Action = Common.Back_To_Bookmark;
 
             ((MainActivity) getActivity()).goToProvinceReport(adapter.getItemList(position).iso, province, adapter.getItemList(position).name);
 

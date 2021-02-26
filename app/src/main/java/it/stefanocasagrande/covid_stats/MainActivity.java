@@ -3,6 +3,7 @@ package it.stefanocasagrande.covid_stats;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -39,6 +40,9 @@ import it.stefanocasagrande.covid_stats.json_classes.provinces.Provinces;
 import it.stefanocasagrande.covid_stats.json_classes.regions.Regions;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Province_Response;
 import it.stefanocasagrande.covid_stats.json_classes.reports.Total_Response;
+import it.stefanocasagrande.covid_stats.ui.ListBookmarkFragment;
+import it.stefanocasagrande.covid_stats.ui.ListHistoryFragment;
+import it.stefanocasagrande.covid_stats.ui.ListRegionsFragment;
 import it.stefanocasagrande.covid_stats.ui.ListprovincesFragment;
 import it.stefanocasagrande.covid_stats.ui.MainFragment;
 import it.stefanocasagrande.covid_stats.ui.ProvinceReportFragment;
@@ -100,7 +104,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Toast.makeText(this,getString(R.string.To_Do), Toast.LENGTH_LONG).show();
+        switch (Common.Back_Action)
+        {
+            case Common.Back_To_Main:
+                goToWorldStats();
+                break;
+            case Common.Back_To_RegionList:
+                goToListRegions();
+
+                Common.Back_Action = Common.Back_To_Main;
+
+                break;
+            case Common.Back_To_ProvinceList:
+
+                if (TextUtils.isEmpty(Common.ISO_CODE))
+                    goToListRegions();
+                else
+                    goToListprovincesFragment(Common.ISO_CODE);
+
+                Common.Back_Action = Common.Back_To_ProvinceList;
+
+                break;
+            case Common.Back_To_Bookmark:
+                goToBookmarks();
+
+                Common.Back_Action = Common.Back_To_Main;
+
+                break;
+            case Common.Back_To_History:
+                goToHistory();
+
+                Common.Back_Action = Common.Back_To_Main;
+                break;
+        }
     }
 
     @Override
@@ -145,6 +181,27 @@ public class MainActivity extends AppCompatActivity {
             else
                 Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void goToBookmarks()
+    {
+        Fragment fragment = ListBookmarkFragment.newInstance();
+        String tag=getString(R.string.ListBookmarkFragment);
+        Show_Fragment(fragment, tag);
+    }
+
+    public void goToHistory()
+    {
+        Fragment fragment = ListHistoryFragment.newInstance();
+        String tag=getString(R.string.ListHistoryFragment);
+        Show_Fragment(fragment, tag);
+    }
+
+    public void goToListRegions()
+    {
+        Fragment fragment = ListRegionsFragment.newInstance();
+        String tag=getString(R.string.ListRegionsFragment);
+        Show_Fragment(fragment, tag);
     }
 
     public void goToWorldStats()

@@ -24,6 +24,9 @@
     <string name="ListProvincesFragment" translatable="false">ListProvincesFragment</string>
     <string name="ProvinceReportFragment" translatable="false">ProvinceReportFragment</string>
     <string name="MainFragment" translatable="false">MainFragment</string>
+    <string name="ListRegionsFragment" translatable="false">ListRegionsFragment</string>
+    <string name="ListHistoryFragment" translatable="false">ListHistoryFragment</string>
+    <string name="ListBookmarkFragment" translatable="false">ListBookmarkFragment</string>
 
     <string name="Placeholder_new" translatable="false">[Loading..]</string>
     <string name="Placeholder_total" translatable="false">[Loading..]</string>

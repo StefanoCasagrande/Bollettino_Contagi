@@ -144,6 +144,9 @@ public class ListprovincesFragment extends Fragment {
             if (province.equals(getString(R.string.General)))
                 province=null;
 
+            Common.Back_Action = Common.Back_To_ProvinceList;
+            Common.ISO_CODE = adapter.getItemList(position).iso;
+
             ((MainActivity) getActivity()).goToProvinceReport(adapter.getItemList(position).iso, province, adapter.getItemList(position).name);
 
         });

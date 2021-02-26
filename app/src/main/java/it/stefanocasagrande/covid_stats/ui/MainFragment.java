@@ -82,6 +82,8 @@ public class MainFragment extends Fragment implements Covid_Interface, View.OnCl
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
+        Common.Back_Action = Common.Back_To_Main;
+
         tv_date = v.findViewById(R.id.tv_date);
         tv_confirmed_cases = v.findViewById(R.id.tv_confirmed_cases);
         tv_confirmed_diff = v.findViewById(R.id.tv_confirmed_diff);

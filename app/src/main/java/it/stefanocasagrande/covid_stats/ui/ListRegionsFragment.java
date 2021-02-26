@@ -50,6 +50,13 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    public static ListRegionsFragment newInstance() {
+        ListRegionsFragment fragment = new ListRegionsFragment();
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
@@ -66,6 +73,8 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cerca, container, false);
+
+        Common.Back_Action = Common.Back_To_Main;
 
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
@@ -119,6 +128,8 @@ public class ListRegionsFragment extends Fragment implements Covid_Interface {
         adapter = new Regions_Adapter(getActivity(), R.layout.single_item,list_to_load);
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id)-> {
+
+            Common.Back_Action = Common.Back_To_RegionList;
 
             Data_Regions nation_selected = adapter.getItemList(position);
 

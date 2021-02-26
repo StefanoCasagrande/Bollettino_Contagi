@@ -12,6 +12,16 @@ import java.util.TimeZone;
 public class Common {
 
     public static DB Database;
+    public static String ISO_CODE;
+
+    public static int Back_Action=0;
+
+    public static final int Back_To_Main=0;
+    public static final int Back_To_RegionList=1;
+    public static final int Back_To_ProvinceList=2;
+    public static final int Back_To_Bookmark=3;
+    public static final int Back_To_History=4;
+
 
     public static String AddDotToInteger(Integer value)
     {
