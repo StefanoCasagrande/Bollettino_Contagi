@@ -1,6 +1,7 @@
 package it.stefanocasagrande.covid_stats.ui;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -239,6 +240,9 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
         }
         else
         {
+            final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
+            waiting_bar.show();
+
             tv_date.setText(wResponse.getDatas().get(0).getdate_dd_MM_yyyy());
             tv_region.setText(wResponse.getDatas().get(0).getregion().name);
 
@@ -298,6 +302,8 @@ public class ProvinceReportFragment extends Fragment implements Covid_Interface,
 
             DecimalFormat df = new DecimalFormat("#.##");
             tv_fatality_rate.setText(String.format("%s %s%%", getString(R.string.Title_fatality), df.format((fatality_rate/wResponse.getDatas().size())*100)));
+
+            waiting_bar.dismiss();
         }
 
     }

@@ -82,4 +82,7 @@
 
     <string name="empty_text">No items to show..</string>
     <string name="Not_Available">Not Available</string>
+
+    <string name="Progress_Text">Loading.. Please wait..</string>
+    <string name="Progress_Title">Loading..</string>
 </resources>

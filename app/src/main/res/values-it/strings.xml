@@ -62,7 +62,9 @@
 
     <string name="Help_Text">Usa il menù in alto a sinistra ( 3 righe orizzontali ) per navigare nell\'app.\n\nCon "Ricerca.." puoi trovare lo stato o lo provincia di tuo interesse.\n\nIn "Preferiti" puoi salvare le tue statistiche preferite così da averle sempre sotto mano.</string>
 
-
     <string name="empty_text">Nessun elemento da mostrare</string>
     <string name="Not_Available">Non disponibile</string>
+
+    <string name="Progress_Text">In caricamento, attendere..</string>
+    <string name="Progress_Title">Loading..</string>
 </resources>

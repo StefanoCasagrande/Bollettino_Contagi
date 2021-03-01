@@ -2,6 +2,7 @@ package it.stefanocasagrande.covid_stats;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -240,8 +241,22 @@ public class MainActivity extends AppCompatActivity {
 
     //region API Call
 
+    public ProgressDialog getprogressDialog()
+    {
+        ProgressDialog var = new ProgressDialog(MainActivity.this);
+        var.setMessage(getString(R.string.Progress_Text));
+        var.setTitle(getString(R.string.Progress_Title));
+        var.setIndeterminate(true);
+        var.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        return var;
+    }
+
     public void getProvinces(String iso)
     {
+        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar.show();
+
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
         API covidAPIs = retrofit.create(API.class);
@@ -259,10 +274,13 @@ public class MainActivity extends AppCompatActivity {
                     if (Common.Database.Insert_Provinces(wResponse.getData(), getApplicationContext()))
                         goToListprovincesFragment(iso);
                 }
+
+                waiting_bar.dismiss();
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                waiting_bar.dismiss();
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
@@ -270,6 +288,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getNations()
     {
+        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar.show();
+
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
         API covidAPIs = retrofit.create(API.class);
@@ -286,16 +307,22 @@ public class MainActivity extends AppCompatActivity {
                     Regions wResponse = (Regions) response.body();
                     Common.Database.Insert_Nations(wResponse.getData());
                 }
+
+                waiting_bar.dismiss();
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                waiting_bar.dismiss();
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void getTotalReport(MainFragment var, Date selected_date) {
+
+        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar.show();
 
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit= NetworkClient.getRetrofitClient();
@@ -323,10 +350,13 @@ public class MainActivity extends AppCompatActivity {
                     else if (var.isVisible())
                         var.newReportAvailable(wResponse);
                 }
+
+                waiting_bar.dismiss();
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                waiting_bar.dismiss();
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
@@ -335,6 +365,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getReportByProvince(String iso, Date selected_date, String province, ProvinceReportFragment var)
     {
+        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar.show();
+
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
@@ -359,10 +392,12 @@ public class MainActivity extends AppCompatActivity {
                     if (var.isVisible())
                         var.newProvinceReportAvailable(wResponse);
                 }
+                waiting_bar.dismiss();
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                waiting_bar.dismiss();
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
