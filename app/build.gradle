@@ -6,7 +6,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "it.stefanocasagrande.covid_stats"
+        applicationId "it.stefanocasagrande.bollettino_contagi"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
