@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Covid_Stats</string>
+    <string name="app_name">Infection bulletins</string>
     <string name="action_info" translatable="false">Info..</string>
     <string name="help">Help..</string>
 
@@ -54,7 +54,7 @@
     <string name="Internet_Missing">No internet connection - A connection is needed</string>
     <string name="No_Report_Available">No Report Available for the zone selected / date inserted</string>
     <string name="API_Error" translatable="false">API Error - %1$s</string>
-    <string name="Splash_Title">Covid Stats</string>
+    <string name="Splash_Title">Infection bulletins</string>
     <string name="Splash_Subtitle">Search for any nation statistics</string>
 
     <string name="Menu_Title">Don\'t forget:</string>

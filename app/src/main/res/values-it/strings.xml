@@ -1,5 +1,5 @@
 <resources>
-
+    <string name="app_name">Bollettino Contagi</string>
     <string name="menu_home">Situazione generale</string>
     <string name="menu_search">Ricerca..</string>
     <string name="menu_bookmark">Preferiti</string>
@@ -38,7 +38,7 @@
     <string name="General">General</string>
     <string name="World">Mondo</string>
 
-    <string name="Splash_Title">Covid Stats</string>
+    <string name="Splash_Title">Bollettino Contagi</string>
     <string name="Splash_Subtitle">Consulta le statistiche di ogni Nazione</string>
 
     <string name="Menu_Title">Ricorda sempre:</string>
