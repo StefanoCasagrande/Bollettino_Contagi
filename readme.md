@@ -1,6 +1,6 @@
 
 
-# Covid Stats
+# Bollettino Contagi
 
 This is an Android App to retrieve Covid Stats based on public data by Johns Hopkins CSSE the app includes search by country, province, and date.
 Returns diff for confirmed, deaths, and recovered, compared with the previous day.
