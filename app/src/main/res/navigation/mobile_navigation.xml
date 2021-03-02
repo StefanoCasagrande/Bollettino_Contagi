@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="it.stefanocasagrande.covid_stats.ui.MainFragment"
+        android:name="it.stefanocasagrande.infection_bulletin.ui.MainFragment"
         android:label="@string/menu_home" />
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="it.stefanocasagrande.covid_stats.ui.ListRegionsFragment"
+        android:name="it.stefanocasagrande.infection_bulletin.ui.ListRegionsFragment"
         android:label="@string/menu_search" />
 
     <fragment
         android:id="@+id/nav_bookmark"
-        android:name="it.stefanocasagrande.covid_stats.ui.ListBookmarkFragment"
+        android:name="it.stefanocasagrande.infection_bulletin.ui.ListBookmarkFragment"
         android:label="@string/menu_bookmark" />
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="it.stefanocasagrande.covid_stats.ui.ListHistoryFragment"
+        android:name="it.stefanocasagrande.infection_bulletin.ui.ListHistoryFragment"
         android:label="@string/menu_history" />
 </navigation>
